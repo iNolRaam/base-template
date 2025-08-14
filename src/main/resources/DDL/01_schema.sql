@@ -1,0 +1,2 @@
+DROP SCHEMA IF EXISTS base_template CASCADE;
+CREATE SCHEMA base_template;
