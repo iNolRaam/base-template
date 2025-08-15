@@ -87,3 +87,25 @@ CREATE TABLE base_template.roles_rights
 
 ALTER TABLE IF EXISTS base_template.roles_rights
     OWNER to postgres;
+
+CREATE TABLE base_template.profiles_roles
+(
+    id_profile     bigint                 NOT NULL,
+    id_role    bigint                 NOT NULL,
+    created_by  character varying(100) NOT NULL,
+    created     time without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_by  character varying(100),
+    last_update time without time zone,
+    CONSTRAINT pk_profiles_roles_comb PRIMARY KEY (id_profile, id_role),
+    CONSTRAINT fk_profiles_roles_id_role FOREIGN KEY (id_role)
+        REFERENCES base_template.roles (id) MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_profiles_roles_id_profile FOREIGN KEY (id_profile)
+        REFERENCES base_template.profiles (id) MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+);
+
+ALTER TABLE IF EXISTS base_template.profiles_roles
+    OWNER to postgres;
