@@ -2,20 +2,18 @@ package com.inolraam.basetemplate.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class Role extends BaseCatalog {
 
     private final Set<Long> rights = new HashSet<>();
-
-    public Role(Long id, String name) {
-        super(id, name);
-    }
 
     public void addRight(Long right) {
         rights.add(right);

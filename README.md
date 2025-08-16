@@ -2,5 +2,8 @@
 It's a base template for my projects using Springboot 3
 
 
+Developer profile: Clean, package and re-create database:
+mvn clean package -DsqlMode=always -Dprofile=dev
 
-mvn clean package -Dspring.sql.init.mode=always
+Production profile: Clean, package and re-create database:
+mvn clean package -DsqlMode=always -Dprofile=prod

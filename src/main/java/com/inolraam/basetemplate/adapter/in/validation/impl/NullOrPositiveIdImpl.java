@@ -1,10 +1,10 @@
-package com.inolraam.basetemplate.adapter.validation.validator;
+package com.inolraam.basetemplate.adapter.in.validation.impl;
 
-import com.inolraam.basetemplate.adapter.validation.NullOrPositiveId;
+import com.inolraam.basetemplate.adapter.in.validation.NullOrPositiveId;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class NullOrPositiveIdValidator implements ConstraintValidator<NullOrPositiveId, Long> {
+public class NullOrPositiveIdImpl implements ConstraintValidator<NullOrPositiveId, Long> {
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {

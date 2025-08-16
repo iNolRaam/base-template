@@ -19,10 +19,10 @@ public final class RightDtoMapper {
 
     public static Right toDomain(RightInput input) {
         if (input == null) return null;
-
-        return new Right(
-                input.getId(),
-                input.getName()
-        );
+        return Right.builder()
+                .id(input.getId())
+                .idTypeRight(input.getIdTypoRight())
+                .visible(input.isVisible())
+                .build();
     }
 }

@@ -1,0 +1,50 @@
+spring:
+  profiles:
+    active: ${profile:dev}
+  application:
+    name: base-template
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  # Datasource configuration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/db_basetemplate
+    username: postgres
+    password: admin
+
+  # JPA configuration
+  jpa:
+    properties:
+      hibernate:
+        default_schema: base_template
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    # database-platform:
+    # hibernate:
+    #   ddl-auto: validate
+    # properties:
+    #   generate_statistics: true
+    #   hibernate:
+    #     format_sql: true
+    #     enable_lazy_load_no_trans: true
+    #   javax:
+    #     persistence:
+    #       sharedCache:
+    #         mode: ALL
+    # open-in-view: false
+
+  # SQL configuration
+  sql:
+    init:
+      schema-locations: classpath:DDL/schema.sql
+      # data-locations: classpath:DML/data.sql
+      mode: ${sqlMode:never}
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

@@ -1,6 +1,5 @@
 package com.inolraam.basetemplate.domain.port;
 
-import com.inolraam.basetemplate.domain.Right;
 import com.inolraam.basetemplate.domain.Role;
 
 import java.util.List;

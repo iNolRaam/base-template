@@ -4,15 +4,20 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 @Entity
 @Table(name = "type_rights")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class TypeRight extends BaseCatalogEntity {
+public class TypeRightEntity extends BaseCatalogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_type_rights_id")
     @SequenceGenerator(name = "seq_type_rights_id", allocationSize = 1)
     private long id;
+
+    public TypeRightEntity(long id){
+        this.id = id;
+    }
 }

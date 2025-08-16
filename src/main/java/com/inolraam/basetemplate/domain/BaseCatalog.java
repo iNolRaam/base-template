@@ -1,13 +1,18 @@
 package com.inolraam.basetemplate.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 @Getter
-@AllArgsConstructor
-public class BaseCatalog {
-    private final Long id;
-    private final String name;
+@SuperBuilder
+public class BaseCatalog implements Serializable {
+    @Serial
+    private final static long serialVersionUID = 1L;
+
+    private Long id;
+    private String name;
+    private boolean visible;
 }

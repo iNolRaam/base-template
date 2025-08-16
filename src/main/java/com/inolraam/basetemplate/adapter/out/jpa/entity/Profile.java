@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "profiles")
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profile extends BaseCatalogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_profiles_id")

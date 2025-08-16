@@ -7,8 +7,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "roles_rights")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class RoleRight extends Auditable {
+public class RoleRight extends AuditableEntity {
     @EmbeddedId
     private RoleRightPK id;
 

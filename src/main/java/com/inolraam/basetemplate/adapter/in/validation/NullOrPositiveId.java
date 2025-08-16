@@ -14,15 +14,15 @@
  * </pre>
  * </p>
  * <p>
- * Validation is performed by {@link com.inolraam.basetemplate.adapter.validation.validator.NullOrPositiveIdValidator}.
+ * Validation is performed by {@link com.inolraam.basetemplate.adapter.in.validation.impl.NullOrPositiveIdImpl}.
  * </p>
  *
  * @author iNolRaam
  * 
  */
-package com.inolraam.basetemplate.adapter.validation;
+package com.inolraam.basetemplate.adapter.in.validation;
 
-import com.inolraam.basetemplate.adapter.validation.validator.NullOrPositiveIdValidator;
+import com.inolraam.basetemplate.adapter.in.validation.impl.NullOrPositiveIdImpl;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -32,7 +32,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
-@Constraint(validatedBy = NullOrPositiveIdValidator.class)
+@Constraint(validatedBy = NullOrPositiveIdImpl.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})
 public @interface NullOrPositiveId  {

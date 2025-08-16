@@ -1,15 +1,14 @@
 package com.inolraam.basetemplate.domain;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.stereotype.Service;
 
 
 @Getter
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class Right extends BaseCatalog {
+public class TypeRight extends BaseCatalog {
 
-    private long idTypeRight;
 
 }

@@ -14,7 +14,7 @@ import java.io.Serial;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @MappedSuperclass
-public class BaseCatalogEntity extends Auditable {
+public class BaseCatalogEntity extends AuditableEntity {
     @Serial
     private static final long serialVersionUID = 1L;
 

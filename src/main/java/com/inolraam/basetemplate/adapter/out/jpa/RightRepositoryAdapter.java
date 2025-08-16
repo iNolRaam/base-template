@@ -15,12 +15,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RightRepositoryAdapter implements RightRepository {
 
-    private final RightJpaRepository rightJpaRepository;
+    private final RightJpaRepository rightJpaRep;
 
     @Override
     public Right save(Right right) {
         final RightEntity rightEntity = RightEntityMapper.toEntity(right);
-        final RightEntity saved = rightJpaRepository.save(rightEntity);
+        final RightEntity saved = rightJpaRep.save(rightEntity);
         return RightEntityMapper.toDomain(saved);
     }
 
