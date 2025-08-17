@@ -12,7 +12,7 @@ public final class TypeRightMapper {
         return TypeRight.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .visible(entity.isVisible())
+                .visible(entity.getVisible())
                 .build();
     }
 
@@ -21,7 +21,7 @@ public final class TypeRightMapper {
         long id = Optional.ofNullable(domain.getId()).orElse(0L);
         final TypeRightEntity entity = new TypeRightEntity(id);
         entity.setName(domain.getName());
-        entity.setVisible(domain.isVisible());
+        entity.setVisible(domain.getVisible());
         return entity;
     }
 }

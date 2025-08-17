@@ -1,8 +1,8 @@
 package com.inolraam.basetemplate.adapter.in;
 
 import com.inolraam.basetemplate.usecase.UseCase;
-import com.inolraam.basetemplate.usecase.dto.RightInput;
-import com.inolraam.basetemplate.usecase.dto.RightOutput;
+import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
+import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/rights")
 public class RightController {
-    private final UseCase<RightInput, RightOutput> createRightUseCase;
+    private final UseCase<UpdateRightInput, RightOutput> createRightUseCase;
 
     @PostMapping
-    public ResponseEntity<RightOutput> createRight(@RequestBody  RightInput input) {
+    public ResponseEntity<RightOutput> createRight(@RequestBody UpdateRightInput input) {
         final RightOutput output = createRightUseCase.execute(input);
         return ResponseEntity.status(HttpStatus.CREATED).body(output);
     }

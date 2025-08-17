@@ -23,7 +23,7 @@ public final class RightEntityMapper {
         return Right.builder()
                 .id(entity.getId())
                 .idTypeRight(entity.getIdTypeRight().getId())
-                .visible(entity.isVisible())
+                .visible(entity.getVisible())
                 .build();
     }
 }

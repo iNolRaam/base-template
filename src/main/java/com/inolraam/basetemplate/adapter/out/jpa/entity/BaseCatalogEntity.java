@@ -1,5 +1,6 @@
 package com.inolraam.basetemplate.adapter.out.jpa.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,8 +21,9 @@ public class BaseCatalogEntity extends AuditableEntity {
 
     @NotBlank
     @Size(max = 100)
+    @Column(nullable = false, length = 100, unique = true)
     protected String name;
 
     @NotNull
-    protected boolean visible;
+    protected Boolean visible;
 }

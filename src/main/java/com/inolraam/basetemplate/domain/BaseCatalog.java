@@ -14,5 +14,5 @@ public class BaseCatalog implements Serializable {
 
     private Long id;
     private String name;
-    private boolean visible;
+    private Boolean visible;
 }

@@ -3,6 +3,10 @@ spring:
     active: ${profile:dev}
   application:
     name: base-template
+  messages:
+    basename: i18n/system-messages
+    encoding: UTF-8
+
 
 ---
 spring:

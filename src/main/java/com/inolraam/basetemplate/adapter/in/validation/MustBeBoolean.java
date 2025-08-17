@@ -14,7 +14,7 @@
  * </pre>
  * </p>
  * <p>
- * Validation is performed by {@link com.inolraam.basetemplate.adapter.in.validation.impl.NullOrPositiveIdImpl}.
+ * Validation is performed by {@link com.inolraam.basetemplate.adapter.in.validation.impl.MustBeBooleanImpl}.
  * </p>
  *
  * @author iNolRaam
@@ -22,7 +22,7 @@
  */
 package com.inolraam.basetemplate.adapter.in.validation;
 
-import com.inolraam.basetemplate.adapter.in.validation.impl.NullOrPositiveIdImpl;
+import com.inolraam.basetemplate.adapter.in.validation.impl.MustBeBooleanImpl;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -32,16 +32,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
-@Constraint(validatedBy = NullOrPositiveIdImpl.class)
+@Constraint(validatedBy = MustBeBooleanImpl.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})
-public @interface NullOrPositiveId  {
+public @interface MustBeBoolean {
 
     /**
      * Default validation message.
      * @return the error message if validation fails
      */
-    String message() default "Solo se permite NULL o numeros positivos mayores a 0";
+    String message() default "Must be true or false";
 
     /**
      * Allows specification of validation groups.
