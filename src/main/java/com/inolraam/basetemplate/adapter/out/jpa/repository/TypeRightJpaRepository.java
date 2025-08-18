@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface TypeRightJpaRepository extends CrudRepository<TypeRightEntity, Long> {
     Optional<TypeRightEntity> findByName(String name);
+
+    boolean existsByName(String name);
 }

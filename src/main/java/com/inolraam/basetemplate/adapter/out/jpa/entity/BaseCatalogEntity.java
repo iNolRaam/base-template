@@ -19,11 +19,9 @@ public class BaseCatalogEntity extends AuditableEntity {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @NotBlank
-    @Size(max = 100)
     @Column(nullable = false, length = 100, unique = true)
-    protected String name;
+    private String name;
 
-    @NotNull
-    protected Boolean visible;
+    @Column(nullable = false, columnDefinition = "boolean")
+    private Boolean visible;
 }

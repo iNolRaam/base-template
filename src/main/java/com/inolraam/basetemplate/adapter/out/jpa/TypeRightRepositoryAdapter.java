@@ -39,6 +39,11 @@ public class TypeRightRepositoryAdapter implements TypeRightRepository {
     }
 
     @Override
+    public boolean existsByName(String name) {
+        return typeRightJpaRep.existsByName(name);
+    }
+
+    @Override
     public void deleteById(long id) {
 
     }

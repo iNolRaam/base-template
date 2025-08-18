@@ -13,5 +13,7 @@ public interface TypeRightRepository {
 
     List<TypeRight> findAll();
 
+    boolean existsByName(String name);
+
     void deleteById(long id);
 }

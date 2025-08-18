@@ -1,5 +1,7 @@
 package com.inolraam.basetemplate.usecase.typeright;
 
+import com.inolraam.basetemplate.common.constant.Fields;
+import com.inolraam.basetemplate.common.exception.DuplicatedFieldException;
 import com.inolraam.basetemplate.common.exception.RequiredFieldException;
 import com.inolraam.basetemplate.domain.TypeRight;
 import com.inolraam.basetemplate.domain.port.TypeRightRepository;
@@ -16,7 +18,6 @@ import org.springframework.util.StringUtils;
 @Service
 @RequiredArgsConstructor
 public class CreateTypeRightUseCase implements UseCase<CreateTypeRightInput, TypeRightOutput> {
-    private static final String FIELD_NAME = "name";
     private final TypeRightRepository typeRightRep;
 
     @Override
@@ -29,7 +30,7 @@ public class CreateTypeRightUseCase implements UseCase<CreateTypeRightInput, Typ
     }
 
     private void isValid(CreateTypeRightInput input) {
-        if (!StringUtils.hasText(input.getName()))
-            throw new RequiredFieldException(FIELD_NAME);
+        if(typeRightRep.existsByName(input.getName()))
+            throw new DuplicatedFieldException(Fields.NAME, input.getName());
     }
 }

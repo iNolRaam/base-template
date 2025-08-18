@@ -1,5 +1,6 @@
 package com.inolraam.basetemplate.usecase.right;
 
+import com.inolraam.basetemplate.common.constant.Fields;
 import com.inolraam.basetemplate.common.exception.RequiredFieldException;
 import com.inolraam.basetemplate.domain.Right;
 import com.inolraam.basetemplate.domain.port.RightRepository;
@@ -14,7 +15,6 @@ import org.springframework.util.StringUtils;
 @Service
 @RequiredArgsConstructor
 public class CreateRightUseCase implements UseCase<UpdateRightInput, RightOutput> {
-    private static final String FIELD_NAME = "name";
     private final RightRepository rightRepository;
 
     public RightOutput execute(UpdateRightInput input) {
@@ -26,6 +26,6 @@ public class CreateRightUseCase implements UseCase<UpdateRightInput, RightOutput
 
     private void isValid(UpdateRightInput input) {
         if (!StringUtils.hasText(input.getName()))
-            throw new RequiredFieldException(FIELD_NAME);
+            throw new RequiredFieldException(Fields.NAME);
     }
 }

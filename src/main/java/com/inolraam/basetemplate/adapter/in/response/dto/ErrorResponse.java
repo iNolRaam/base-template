@@ -1,6 +1,7 @@
-package com.inolraam.basetemplate.adapter.in.dto;
+package com.inolraam.basetemplate.adapter.in.response.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.inolraam.basetemplate.adapter.in.response.Response;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,11 +12,10 @@ import java.util.Map;
 @Getter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GeneralResponse implements Serializable {
+public class ErrorResponse implements Serializable, Response {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private Object data;
     private String errorMessage;
     private Map<String, String> InvalidFields;
 }
