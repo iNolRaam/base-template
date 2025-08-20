@@ -1,4 +1,4 @@
-package com.inolraam.basetemplate.common.constant;
+package com.inolraam.basetemplate.adapter.in.validation;
 
 public final class MessageCodes {
     private MessageCodes() {
@@ -9,4 +9,14 @@ public final class MessageCodes {
     public static final String REQUEST_VALIDATION = "exception.requestValidation";
     public static final String INVALID_FORMAT = "exception.invalidFormat";
     public static final String DEFAULT_INVALID_FORMAT = "exception.default.invalidFormat";
+
+    // Only messages for any annotation need it braces { }
+    public static final String NOT_NULL= "{validation.field.NotNull}";
+    public static final String NOT_BLANK= "{validation.field.NotBlank}";
+    public static final String SIZE = "{validation.field.Size}";
+
+    //Messages for @Pattern annotation
+    public static final String REGEX_ONLY_BASIC_LETTERS = "{regex.basicLetters}";
+
+ 
 }

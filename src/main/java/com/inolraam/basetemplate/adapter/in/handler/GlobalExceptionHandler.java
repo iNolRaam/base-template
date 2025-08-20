@@ -2,7 +2,7 @@ package com.inolraam.basetemplate.adapter.in.handler;
 
 import com.inolraam.basetemplate.adapter.in.response.Response;
 import com.inolraam.basetemplate.adapter.in.response.ResponseBuilder;
-import com.inolraam.basetemplate.common.constant.MessageCodes;
+import com.inolraam.basetemplate.adapter.in.validation.MessageCodes;
 import com.inolraam.basetemplate.common.exception.DuplicatedFieldException;
 import com.inolraam.basetemplate.common.exception.RequestValidationException;
 import com.inolraam.basetemplate.common.exception.RequiredFieldException;
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
             final String msgProperties = String.format(messageUtil.getMessage(MessageCodes.INVALID_FORMAT), value, field, expectedType.getSimpleName());
             response = ResponseBuilder.error(msgProperties);
         } else {
-            response = ResponseBuilder.error(messageUtil.getMessage(MessageCodes.INVALID_FORMAT));
+            response = ResponseBuilder.error(messageUtil.getMessage(MessageCodes.DEFAULT_INVALID_FORMAT));
         }
         return response;
     }

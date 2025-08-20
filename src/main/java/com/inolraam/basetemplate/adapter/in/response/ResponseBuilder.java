@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
+import java.util.Objects;
 
 public final class ResponseBuilder {
     private ResponseBuilder() {}
@@ -15,7 +16,7 @@ public final class ResponseBuilder {
         return createResponseEntity(errorResp);
     }
 
-    public static ResponseEntity<Response> error(String generalError, Map<String, String> fieldsWithErrors) {
+    public static ResponseEntity<Response> error(String generalError, Object[] fieldsWithErrors) {
         final Response errorResp = buildErrorResponse(generalError, fieldsWithErrors);
         return createResponseEntity(errorResp);
     }
@@ -37,7 +38,7 @@ public final class ResponseBuilder {
         return ErrorResponse.builder().errorMessage(error).build();
     }
 
-    private static Response buildErrorResponse(String generalError, Map<String, String> fieldsWithErrors) {
+    private static Response buildErrorResponse(String generalError, Object[] fieldsWithErrors) {
         return ErrorResponse.builder()
                 .errorMessage(generalError)
                 .InvalidFields(fieldsWithErrors)

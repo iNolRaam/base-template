@@ -2,27 +2,30 @@ package com.inolraam.basetemplate.common.exception;
 
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Getter
 public class RequestValidationException extends  RuntimeException{
     private static final String DEFAULT_MSG = "Invalid fields in the request.";
-    private Map<String, String> invalidFields;
+    private final Object[] invalidFields;
 
     public RequestValidationException(BindingResult bindingResult) {
         super(DEFAULT_MSG);
         this.invalidFields = getErrors(bindingResult);
     }
 
-    private static Map<String, String> getErrors(BindingResult bindingResult) {
-        final Map<String, String> errors = new HashMap<>();
+    private static Object[] getErrors(BindingResult bindingResult) {
+        final List<Map.Entry<String, String>> errors = new ArrayList<>();
         bindingResult.getFieldErrors().forEach((error) -> {
-            errors.put(error.getField(), error.getDefaultMessage());
+            if(error.getDefaultMessage() != null) {
+                errors.add(Map.entry(error.getField(), error.getDefaultMessage()));
+            }
         });
-        return errors;
+        return errors.toArray();
     }
+
 }
