@@ -2,6 +2,7 @@ package com.inolraam.basetemplate.adapter.in;
 
 import com.inolraam.basetemplate.adapter.in.response.Response;
 import com.inolraam.basetemplate.adapter.in.response.ResponseBuilder;
+import com.inolraam.basetemplate.adapter.in.swagger.TypeRightSwagger;
 import com.inolraam.basetemplate.common.exception.RequestValidationException;
 import com.inolraam.basetemplate.usecase.typeright.dto.CreateTypeRightInput;
 import com.inolraam.basetemplate.usecase.UseCase;
@@ -13,10 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/type-rights")
-public class TypeRightController {
+public class TypeRightController implements TypeRightSwagger {
     private final UseCase<CreateTypeRightInput, TypeRightOutput> createTypeRightUseCase;
 
     @PostMapping
