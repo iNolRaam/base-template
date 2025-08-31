@@ -11,19 +11,23 @@ import java.util.Objects;
 public final class ResponseBuilder {
     private ResponseBuilder() {}
 
-    public static ResponseEntity<Response> error(String error) {
+    public static ResponseEntity<Response> error(HttpStatus httpStatus, String error) {
         final Response errorResp = buildErrorResponse(error);
-        return createResponseEntity(errorResp);
+        return createResponseEntity(httpStatus, errorResp);
     }
 
-    public static ResponseEntity<Response> error(String generalError, Object[] fieldsWithErrors) {
+    public static ResponseEntity<Response> error(HttpStatus httpStatus, String generalError, Object[] fieldsWithErrors) {
         final Response errorResp = buildErrorResponse(generalError, fieldsWithErrors);
-        return createResponseEntity(errorResp);
+        return createResponseEntity(httpStatus, errorResp);
     }
 
     public static ResponseEntity<Response> success(HttpStatus httpStatus, Object data) {
         final Response successResp = buildSuccesResponse(data);
         return createResponseEntity(httpStatus, successResp);
+    }
+
+    public static ResponseEntity<Response> success(HttpStatus httpStatus) {
+        return createResponseEntity(httpStatus, null);
     }
 
     private static Response buildSuccesResponse(Object data) {
@@ -43,10 +47,5 @@ public final class ResponseBuilder {
                 .errorMessage(generalError)
                 .InvalidFields(fieldsWithErrors)
                 .build();
-    }
-
-
-    private static ResponseEntity<Response> createResponseEntity(Response response) {
-        return ResponseEntity.badRequest().body(response);
     }
 }

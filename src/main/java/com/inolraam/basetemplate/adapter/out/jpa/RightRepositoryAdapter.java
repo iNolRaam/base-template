@@ -1,6 +1,7 @@
 package com.inolraam.basetemplate.adapter.out.jpa;
 
 import com.inolraam.basetemplate.adapter.out.jpa.entity.RightEntity;
+import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
 import com.inolraam.basetemplate.adapter.out.jpa.mapper.RightEntityMapper;
 import com.inolraam.basetemplate.adapter.out.jpa.repository.RightJpaRepository;
 import com.inolraam.basetemplate.domain.Right;
@@ -42,5 +43,10 @@ public class RightRepositoryAdapter implements RightRepository {
     @Override
     public void deleteById(long id) {
 
+    }
+
+    @Override
+    public boolean existsByIdTypeRight(long idTypeRight) {
+        return rightJpaRep.existsByIdTypeRight(new TypeRightEntity(idTypeRight));
     }
 }

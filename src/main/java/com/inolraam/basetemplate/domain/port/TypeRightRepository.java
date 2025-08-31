@@ -3,6 +3,7 @@ package com.inolraam.basetemplate.domain.port;
 import com.inolraam.basetemplate.domain.TypeRight;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TypeRightRepository {
     TypeRight save(TypeRight typeRight);
@@ -12,6 +13,8 @@ public interface TypeRightRepository {
     TypeRight findByName(String name);
 
     List<TypeRight> findAll();
+
+    boolean existsById(long id);
 
     boolean existsByName(String name);
 
