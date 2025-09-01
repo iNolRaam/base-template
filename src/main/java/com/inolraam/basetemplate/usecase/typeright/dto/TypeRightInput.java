@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CreateTypeRightInput extends BaseCatalogDto {
+public class TypeRightInput extends BaseCatalogDto {
 
 }

@@ -1,7 +1,7 @@
 package com.inolraam.basetemplate.adapter.out.jpa;
 
 import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
-import com.inolraam.basetemplate.adapter.out.jpa.mapper.TypeRightMapper;
+import com.inolraam.basetemplate.adapter.out.jpa.mapper.TypeRightEntityMapper;
 import com.inolraam.basetemplate.adapter.out.jpa.repository.TypeRightJpaRepository;
 import com.inolraam.basetemplate.common.exception.NotFoundException;
 import com.inolraam.basetemplate.domain.TypeRight;
@@ -9,7 +9,6 @@ import com.inolraam.basetemplate.domain.port.TypeRightRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -20,24 +19,29 @@ public class TypeRightRepositoryAdapter implements TypeRightRepository {
 
     @Override
     public TypeRight save(TypeRight typeRight) {
-        TypeRightEntity entity = TypeRightMapper.toEntity(typeRight);
+        TypeRightEntity entity = TypeRightEntityMapper.toEntity(typeRight);
         TypeRightEntity saved = typeRightJpaRep.save(entity);
-        return TypeRightMapper.toDomain(saved);
+        return TypeRightEntityMapper.toDomain(saved);
+    }
+
+    @Override
+    public TypeRight update(TypeRight typeRight) {
+        return this.save(typeRight);
     }
 
     @Override
     public TypeRight findById(long id) {
-        return typeRightJpaRep.findById(id).map(TypeRightMapper::toDomain).orElseThrow(() -> new NotFoundException(id));
+        return typeRightJpaRep.findById(id).map(TypeRightEntityMapper::toDomain).orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
     public TypeRight findByName(String name) {
-        return typeRightJpaRep.findByName(name).map(TypeRightMapper::toDomain).orElseThrow(() -> new NotFoundException(name));
+        return typeRightJpaRep.findByName(name).map(TypeRightEntityMapper::toDomain).orElseThrow(() -> new NotFoundException(name));
     }
 
     @Override
     public List<TypeRight> findAll() {
-        return typeRightJpaRep.findAll().stream().map(TypeRightMapper::toDomain).toList();
+        return typeRightJpaRep.findAll().stream().map(TypeRightEntityMapper::toDomain).toList();
     }
 
     @Override
@@ -48,6 +52,11 @@ public class TypeRightRepositoryAdapter implements TypeRightRepository {
     @Override
     public boolean existsById(long id) {
         return typeRightJpaRep.existsById(id);
+    }
+
+    @Override
+    public boolean existsByIdNotAndName(long id, String name) {
+        return typeRightJpaRep.existsByIdNotAndName(id, name);
     }
 
     @Override

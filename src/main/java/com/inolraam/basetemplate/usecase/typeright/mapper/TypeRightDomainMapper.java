@@ -4,26 +4,28 @@ import com.inolraam.basetemplate.domain.TypeRight;
 import com.inolraam.basetemplate.usecase.typeright.dto.TypeRightInput;
 import com.inolraam.basetemplate.usecase.typeright.dto.TypeRightOutput;
 
-public final class TypeRightDtoMapper {
+public final class TypeRightDomainMapper {
 
     public static TypeRight toDomain(TypeRightInput input) {
-        if(input == null) return null;
+        if (input == null) return null;
+        final String formattedName = formatNameToDomain(input.getName());
         return TypeRight.builder()
-                .name(formatName(input.getName()))
+                .name(formattedName)
                 .visible(input.getVisible()).build();
     }
 
     public static TypeRight toDomain(long id, TypeRightInput input) {
-        if(input == null) return null;
+        if (input == null) return null;
+        final String formattedName = formatNameToDomain(input.getName());
         return TypeRight.builder()
                 .id(id)
-                .name(formatName(input.getName()))
+                .name(formattedName)
                 .visible(input.getVisible()).build();
     }
 
 
     public static TypeRightOutput toOutput(TypeRight domain) {
-        if(domain == null) return null;
+        if (domain == null) return null;
         return TypeRightOutput.builder()
                 .id(domain.getId())
                 .name(domain.getName())
@@ -31,7 +33,9 @@ public final class TypeRightDtoMapper {
                 .build();
     }
 
-    private static String formatName(String name){
-        return name.toUpperCase();
+    private static String formatNameToDomain(String name) {
+        return name.toLowerCase();
     }
+
+
 }

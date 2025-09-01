@@ -1,8 +1,7 @@
 package com.inolraam.basetemplate.usecase.typeright.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.inolraam.basetemplate.usecase.dto.BaseCatalogDto;
-import lombok.Data;
+import com.inolraam.basetemplate.usecase.dtoglobal.BaseCatalogDto;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

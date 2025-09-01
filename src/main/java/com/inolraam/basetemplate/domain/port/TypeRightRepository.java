@@ -3,10 +3,11 @@ package com.inolraam.basetemplate.domain.port;
 import com.inolraam.basetemplate.domain.TypeRight;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TypeRightRepository {
     TypeRight save(TypeRight typeRight);
+
+    TypeRight update(TypeRight typeRight);
 
     TypeRight findById(long id);
 
@@ -17,6 +18,8 @@ public interface TypeRightRepository {
     boolean existsById(long id);
 
     boolean existsByName(String name);
+
+    boolean existsByIdNotAndName(long id, String name);
 
     void deleteById(long id);
 }

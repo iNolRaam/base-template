@@ -1,8 +1,8 @@
 package com.inolraam.basetemplate.common.constant;
 
-public  final class CommonValues {
+public  final class Global {
 
-    private CommonValues() {}
+    private Global() {}
 
     public static final Long MIN_VALUE_TO_ID =  1L;
 

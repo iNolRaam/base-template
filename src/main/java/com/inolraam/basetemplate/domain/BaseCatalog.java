@@ -12,7 +12,7 @@ public class BaseCatalog implements Serializable {
     @Serial
     private final static long serialVersionUID = 1L;
 
-    private Long id;
-    private String name;
-    private Boolean visible;
+    protected Long id;
+    protected String name;
+    protected Boolean visible;
 }

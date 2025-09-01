@@ -5,7 +5,7 @@ import com.inolraam.basetemplate.domain.TypeRight;
 
 import java.util.Optional;
 
-public final class TypeRightMapper {
+public final class TypeRightEntityMapper {
 
     public static TypeRight toDomain(TypeRightEntity entity) {
         if(entity == null) return null;

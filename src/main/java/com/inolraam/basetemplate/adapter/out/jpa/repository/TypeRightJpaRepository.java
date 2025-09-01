@@ -10,5 +10,7 @@ public interface TypeRightJpaRepository extends JpaRepository<TypeRightEntity, L
 
     boolean existsByName(String name);
 
+    boolean existsByIdNotAndName(long id, String name);
+
     void deleteById(long id);
 }

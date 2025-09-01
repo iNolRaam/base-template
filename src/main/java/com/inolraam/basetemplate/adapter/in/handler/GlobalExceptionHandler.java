@@ -3,7 +3,7 @@ package com.inolraam.basetemplate.adapter.in.handler;
 import com.inolraam.basetemplate.adapter.in.response.Response;
 import com.inolraam.basetemplate.adapter.in.response.ResponseBuilder;
 import com.inolraam.basetemplate.adapter.in.validation.MessageCodes;
-import com.inolraam.basetemplate.common.constant.CommonValues;
+import com.inolraam.basetemplate.common.constant.Global;
 import com.inolraam.basetemplate.common.exception.*;
 import com.inolraam.basetemplate.common.util.MessageUtil;
 import lombok.RequiredArgsConstructor;
@@ -73,7 +73,8 @@ public class GlobalExceptionHandler {
         final Object[] invalidFieldsWithMessage = new Object[invalidFields.length];
         
         for(int i = 0; i < invalidFields.length; i++){
-            String[] obj = invalidFields[i].toString().split(CommonValues.EQUAL_SIGN);
+            System.out.println(invalidFields[i]);
+            String[] obj = invalidFields[i].toString().split(Global.EQUAL_SIGN);
             String field = obj[0];
             String value = obj[1];
             invalidFieldsWithMessage[i] = new Object[]{field, messageUtil.getMessage(MessageCodes.PREFIX_VALIDATION_FIELD + value)};

@@ -1,8 +1,7 @@
 package com.inolraam.basetemplate.usecase.right.mapper;
 
 import com.inolraam.basetemplate.domain.Right;
-import com.inolraam.basetemplate.usecase.right.CreateRightUseCase;
-import com.inolraam.basetemplate.usecase.right.dto.CreateRightInput;
+import com.inolraam.basetemplate.usecase.right.dto.RightInput;
 import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
 import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
 
@@ -28,7 +27,7 @@ public final class RightDtoMapper {
                 .build();
     }
 
-    public static Right toDomain(CreateRightInput input) {
+    public static Right toDomain(RightInput input) {
         if (input == null) return null;
         return Right.builder()
                 .idTypeRight(input.getIdTypoRight())

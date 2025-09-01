@@ -1,4 +1,4 @@
-package com.inolraam.basetemplate.usecase.dto;
+package com.inolraam.basetemplate.usecase.dtoglobal;
 
 import com.inolraam.basetemplate.adapter.in.validation.MessageCodes;
 import com.inolraam.basetemplate.adapter.in.validation.RegexPatterns;
@@ -7,13 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-@Data
+@Getter
 @SuperBuilder
 @NoArgsConstructor
 public class BaseCatalogDto implements Serializable {

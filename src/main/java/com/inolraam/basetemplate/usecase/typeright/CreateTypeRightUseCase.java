@@ -1,36 +1,34 @@
 package com.inolraam.basetemplate.usecase.typeright;
 
-import com.inolraam.basetemplate.common.constant.Fields;
-import com.inolraam.basetemplate.common.exception.DuplicatedFieldException;
-import com.inolraam.basetemplate.common.exception.RequiredFieldException;
 import com.inolraam.basetemplate.domain.TypeRight;
 import com.inolraam.basetemplate.domain.port.TypeRightRepository;
+import com.inolraam.basetemplate.domain.service.TypeRightValidator;
 import com.inolraam.basetemplate.usecase.UseCase;
-import com.inolraam.basetemplate.usecase.typeright.dto.CreateTypeRightInput;
+import com.inolraam.basetemplate.usecase.typeright.dto.TypeRightInput;
 import com.inolraam.basetemplate.usecase.typeright.dto.TypeRightOutput;
-import com.inolraam.basetemplate.usecase.typeright.mapper.TypeRightDtoMapper;
+import com.inolraam.basetemplate.usecase.typeright.mapper.TypeRightDomainMapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 @Service
 @RequiredArgsConstructor
-public class CreateTypeRightUseCase implements UseCase<CreateTypeRightInput, TypeRightOutput> {
+public class CreateTypeRightUseCase implements UseCase<TypeRightInput, TypeRightOutput> {
     private final TypeRightRepository typeRightRep;
+    private final TypeRightValidator typeRightValidator;
 
     @Override
     @Transactional
-    public TypeRightOutput execute(CreateTypeRightInput input) {
-        isValid(input);
-        TypeRight right = TypeRightDtoMapper.toDomain(input);
-        TypeRight saved = typeRightRep.save(right);
-        return TypeRightDtoMapper.toOutput(saved);
+    public TypeRightOutput execute(TypeRightInput input) {
+        final TypeRight newData = TypeRightDomainMapper.toDomain(input);
+        validateCreatingAllowed(newData);
+        TypeRight persisted = typeRightRep.save(newData);
+        return TypeRightDomainMapper.toOutput(persisted);
     }
 
-    private void isValid(CreateTypeRightInput input) {
-        if(typeRightRep.existsByName(input.getName()))
-            throw new DuplicatedFieldException(Fields.NAME, input.getName());
+    private void validateCreatingAllowed(TypeRight input) {
+        typeRightValidator.validateNameIsUnique(input.getName());
     }
+
 }

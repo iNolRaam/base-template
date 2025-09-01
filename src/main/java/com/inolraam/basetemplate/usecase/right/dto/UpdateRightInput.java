@@ -1,6 +1,6 @@
 package com.inolraam.basetemplate.usecase.right.dto;
 
-import com.inolraam.basetemplate.usecase.dto.BaseCatalogDto;
+import com.inolraam.basetemplate.usecase.dtoglobal.BaseCatalogDto;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 

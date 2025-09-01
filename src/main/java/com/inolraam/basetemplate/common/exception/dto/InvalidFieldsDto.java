@@ -2,11 +2,13 @@ package com.inolraam.basetemplate.common.exception.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
 
 @Getter
+@ToString
 @AllArgsConstructor
 public class InvalidFieldsDto implements Serializable {
     @Serial

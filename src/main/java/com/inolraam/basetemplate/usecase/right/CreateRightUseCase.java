@@ -5,6 +5,7 @@ import com.inolraam.basetemplate.common.exception.RequiredFieldException;
 import com.inolraam.basetemplate.domain.Right;
 import com.inolraam.basetemplate.domain.port.RightRepository;
 import com.inolraam.basetemplate.usecase.UseCase;
+import com.inolraam.basetemplate.usecase.right.dto.RightInput;
 import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
 import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
 import com.inolraam.basetemplate.usecase.right.mapper.RightDtoMapper;
@@ -14,18 +15,17 @@ import org.springframework.util.StringUtils;
 
 @Service
 @RequiredArgsConstructor
-public class CreateRightUseCase implements UseCase<UpdateRightInput, RightOutput> {
+public class CreateRightUseCase implements UseCase<RightInput, RightOutput> {
     private final RightRepository rightRepository;
 
-    public RightOutput execute(UpdateRightInput input) {
+    public RightOutput execute(RightInput input) {
         isValid(input);
         Right right = RightDtoMapper.toDomain(input);
         Right saved = rightRepository.save(right);
         return RightDtoMapper.toOutput(saved);
     }
 
-    private void isValid(UpdateRightInput input) {
-        if (!StringUtils.hasText(input.getName()))
-            throw new RequiredFieldException(Fields.NAME);
+    private void isValid(RightInput input) {
+
     }
 }
