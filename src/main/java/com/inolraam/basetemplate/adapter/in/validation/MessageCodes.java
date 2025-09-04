@@ -13,6 +13,7 @@ public final class MessageCodes {
     public static final String DEFAULT_INVALID_FORMAT = "exception.default.invalidFormat";
     public static final String NOT_FOUND = "exception.notFound";
     public static final String RESOURCE_IN_USE = "exception.resourceInUse";
+    public static final String TYPE_MISMATCH = "exception.typeMismatch";
 
 
 
@@ -24,6 +25,7 @@ public final class MessageCodes {
 
     //Messages for @Pattern annotation
     public static final String REGEX_ONLY_BASIC_LETTERS = "{regex.basicLetters}";
+    public static final String REGEX_ONLY_FOR_SYSTEM_PARAMETERS =  "{regex.systemParameter}";
 
  
 }

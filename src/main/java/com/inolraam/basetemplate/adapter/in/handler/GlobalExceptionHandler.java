@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
@@ -66,6 +70,13 @@ public class GlobalExceptionHandler {
             response = ResponseBuilder.error(HttpStatus.BAD_REQUEST, messageUtil.getMessage(MessageCodes.DEFAULT_INVALID_FORMAT));
         }
         return response;
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Response> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        final String value = ex.getValue() != null ? ex.getValue().toString() : Global.NULL;
+        final String msg = String.format(messageUtil.getMessage(MessageCodes.TYPE_MISMATCH), ex.getName(), value);
+        return ResponseBuilder.error(HttpStatus.BAD_REQUEST, msg);
     }
 
 

@@ -9,4 +9,6 @@ public  final class Global {
     public static final String POSITIVE =  "Positive";
 
     public static final String EQUAL_SIGN = "=";
+
+    public static final String NULL = "null";
 }
