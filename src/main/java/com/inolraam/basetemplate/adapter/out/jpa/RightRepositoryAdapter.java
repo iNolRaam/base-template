@@ -49,4 +49,9 @@ public class RightRepositoryAdapter implements RightRepository {
     public boolean existsByIdTypeRight(long idTypeRight) {
         return rightJpaRep.existsByIdTypeRight(new TypeRightEntity(idTypeRight));
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return rightJpaRep.existsByName(name);
+    }
 }

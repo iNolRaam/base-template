@@ -1,6 +1,5 @@
 package com.inolraam.basetemplate.domain.port;
 
-import com.inolraam.basetemplate.adapter.out.jpa.entity.RightEntity;
 import com.inolraam.basetemplate.domain.Right;
 
 import java.util.List;
@@ -18,4 +17,6 @@ public interface RightRepository {
     void deleteById(long id);
 
     boolean existsByIdTypeRight(long idTypeRight);
+
+    boolean existsByName(String name);
 }

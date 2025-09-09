@@ -1,5 +1,6 @@
 package com.inolraam.basetemplate.adapter.in;
 
+import com.inolraam.basetemplate.adapter.in.constant.ApiPaths;
 import com.inolraam.basetemplate.adapter.in.response.*;
 import com.inolraam.basetemplate.adapter.in.swagger.TypeRightSwagger;
 import com.inolraam.basetemplate.common.exception.RequestValidationException;
@@ -13,10 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/type-rights")
+@RequestMapping(ApiPaths.TYPE_RIGHTS)
 public class TypeRightController implements TypeRightSwagger {
     private final UseCase<TypeRightInput, TypeRightOutput> createTypeRightUseCase;
     private final UseCaseVoid<Long> deleteTypeRightUseCase;
@@ -25,7 +25,8 @@ public class TypeRightController implements TypeRightSwagger {
 
     @PostMapping
     public ResponseEntity<Response> createTypeRight(@Valid @RequestBody TypeRightInput input, BindingResult result) {
-        if (result.hasErrors()) throw new RequestValidationException(result);
+        if (result.hasErrors())
+            throw new RequestValidationException(result);
 
         final TypeRightOutput output = createTypeRightUseCase.execute(input);
         return ResponseBuilder.success(HttpStatus.CREATED, output);
@@ -38,8 +39,10 @@ public class TypeRightController implements TypeRightSwagger {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Response> updateTypeRight(@PathVariable long id, @Valid @RequestBody TypeRightInput input, BindingResult result) {
-        if (result.hasErrors()) throw new RequestValidationException(result);
+    public ResponseEntity<Response> updateTypeRight(@PathVariable long id, @Valid @RequestBody TypeRightInput input,
+            BindingResult result) {
+        if (result.hasErrors())
+            throw new RequestValidationException(result);
 
         final TypeRightOutput output = updateTypeRightUseCase.execute(new UpdateTypeRightInput(id, input));
         return ResponseBuilder.success(HttpStatus.OK, output);
