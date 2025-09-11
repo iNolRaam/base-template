@@ -10,7 +10,14 @@ public interface TypeRightJpaRepository extends JpaRepository<TypeRightEntity, L
 
     boolean existsByName(String name);
 
+    /**
+     * Checks if a TypeRightEntity exists with the given name, excluding the entity with the specified id.
+     * Useful for ensuring name uniqueness when updating an entity.
+     *
+     * @param id the id to exclude from the check
+     * @param name the name to check for existence
+     * @return true if another entity with the given name exists, false otherwise
+     */
     boolean existsByIdNotAndName(long id, String name);
-
-    void deleteById(long id);
+   
 }
