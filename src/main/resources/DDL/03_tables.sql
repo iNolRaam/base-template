@@ -6,7 +6,7 @@ CREATE TABLE base_template.type_rights
     created_by    character varying(100) NOT NULL,
     created_at    time without time zone NOT NULL,
     updated_by    character varying(100),
-    lst_update_at time without time zone,
+    lst_updated_at time without time zone,
     CONSTRAINT pk_type_rights_id PRIMARY KEY (id),
     CONSTRAINT uk_type_rights_name UNIQUE (name)
 );
@@ -23,7 +23,7 @@ CREATE TABLE base_template.rights
     created_by    character varying(100) NOT NULL,
     created_at    time without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by    character varying(100),
-    lst_update_at time without time zone,
+    lst_updated_at time without time zone,
     CONSTRAINT pk_rights_id PRIMARY KEY (id),
     CONSTRAINT uk_rights_name UNIQUE (name),
     CONSTRAINT fk_rights_id_type_right FOREIGN KEY (id_type_right)
@@ -43,7 +43,7 @@ CREATE TABLE base_template.roles
     created_by    character varying(100) NOT NULL,
     created_at    time without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by    character varying(100),
-    lst_update_at time without time zone,
+    lst_updated_at time without time zone,
     CONSTRAINT pk_roles_id PRIMARY KEY (id),
     CONSTRAINT uk_roles_name UNIQUE (name)
 );
@@ -60,7 +60,7 @@ CREATE TABLE base_template.profiles
     created_by    character varying(100) NOT NULL,
     created_at    time without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by    character varying(100),
-    lst_update_at time without time zone,
+    lst_updated_at time without time zone,
     CONSTRAINT pk_profiles_id PRIMARY KEY (id),
     CONSTRAINT uk_profiles_name UNIQUE (name)
 );
@@ -77,7 +77,7 @@ CREATE TABLE base_template.roles_rights
     created_by    character varying(100) NOT NULL,
     created_at    time without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by    character varying(100),
-    lst_update_at time without time zone,
+    lst_updated_at time without time zone,
     CONSTRAINT pk_roles_rights_comb PRIMARY KEY (id_role, id_right),
     CONSTRAINT fk_roles_rights_id_right FOREIGN KEY (id_right)
         REFERENCES base_template.rights (id) MATCH SIMPLE
@@ -99,7 +99,7 @@ CREATE TABLE base_template.profiles_roles
     created_by    character varying(100) NOT NULL,
     created_at    time without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by    character varying(100),
-    lst_update_at time without time zone,
+    lst_updated_at time without time zone,
     CONSTRAINT pk_profiles_roles_comb PRIMARY KEY (id_profile, id_role),
     CONSTRAINT fk_profiles_roles_id_role FOREIGN KEY (id_role)
         REFERENCES base_template.roles (id) MATCH SIMPLE

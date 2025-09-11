@@ -43,6 +43,6 @@ public class AuditableEntity implements Serializable {
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "lst_update_at", insertable = false)
+    @Column(name = "lst_updated_at", insertable = false)
     private Date lastUpdatedAt;
 }
