@@ -39,7 +39,7 @@ public interface RightSwagger {
 
         @Operation(summary = "Update right", description = "Method to update a right by id", tags = {
                         Tag.RIGHT }, requestBody = @RequestBody(description = REQUEST_BODY_DESC, required = true, content = {
-                                        @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = UpdateRightInput.class))
+                                        @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = RightInput.class))
                         }), responses = {
                                         @ApiResponse(responseCode = ResponseCode.OK_200, description = ResponseDescription.UPDATE_DESCRIPTION, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = RightOutput.class))),
                                         @ApiResponse(responseCode = ResponseCode.BAD_REQUEST_400, ref = ResponseCode.BAD_REQUEST_400),

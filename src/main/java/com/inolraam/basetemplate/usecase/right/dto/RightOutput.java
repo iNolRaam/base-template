@@ -1,15 +1,20 @@
 package com.inolraam.basetemplate.usecase.right.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
+import com.inolraam.basetemplate.usecase.dtoglobal.BaseSystemCatalogDto;
+
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 
-@Setter
-@AllArgsConstructor
+
+@Getter
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RightOutput {
+public class RightOutput extends BaseSystemCatalogDto {
     private long id;
-    private String name;
+    private long idTypeRight;
+
 }

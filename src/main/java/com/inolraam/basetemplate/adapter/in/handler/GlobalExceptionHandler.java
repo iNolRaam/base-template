@@ -48,15 +48,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Response> handelRequestValidation(NotFoundException ex) {
-        final String errorMessage = String.format(messageUtil.getMessage(MessageCodes.NOT_FOUND), ex.getSearchBy(),
-                ex.getValue());
-        return ResponseBuilder.error(HttpStatus.NOT_FOUND, errorMessage);
+        final Object[] params = new Object[] {
+                ex.getEntityType().getLabel(),
+                ex.getSearchBy(),
+                ex.getValue()
+        };
+        return ResponseBuilder.error(
+                HttpStatus.NOT_FOUND,
+                messageUtil.getMessage(MessageCodes.NOT_FOUND, params));
     }
 
     @ExceptionHandler(ResourceInUseException.class)
     public ResponseEntity<Response> handelRequestValidation(ResourceInUseException ex) {
-        final Object[] field = new Object[] { ex.getId() };
-        return ResponseBuilder.error(HttpStatus.CONFLICT, messageUtil.getMessage(MessageCodes.RESOURCE_IN_USE), field);
+        final Object[] field = new Object[] { ex.getEntityType().getLabel(), ex.getId() };
+        return ResponseBuilder.error(HttpStatus.CONFLICT, messageUtil.getMessage(MessageCodes.RESOURCE_IN_USE, field));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

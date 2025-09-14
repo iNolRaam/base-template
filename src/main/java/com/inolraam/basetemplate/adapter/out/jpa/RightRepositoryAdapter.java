@@ -4,6 +4,7 @@ import com.inolraam.basetemplate.adapter.out.jpa.entity.RightEntity;
 import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
 import com.inolraam.basetemplate.adapter.out.jpa.mapper.RightEntityMapper;
 import com.inolraam.basetemplate.adapter.out.jpa.repository.RightJpaRepository;
+import com.inolraam.basetemplate.common.constant.EntityType;
 import com.inolraam.basetemplate.common.exception.NotFoundException;
 import com.inolraam.basetemplate.domain.Right;
 import com.inolraam.basetemplate.domain.port.RightRepository;
@@ -29,7 +30,7 @@ public class RightRepositoryAdapter implements RightRepository {
     public Right findById(long id) {
         return rightJpaRep.findById(id)
                 .map(RightEntityMapper::toDomain)
-                .orElseThrow(() -> new NotFoundException(id));
+                .orElseThrow(() -> new NotFoundException(EntityType.RIGHT, id));
     }
 
     @Override
@@ -40,7 +41,7 @@ public class RightRepositoryAdapter implements RightRepository {
     @Override
     public Right findByName(String name) {
         return rightJpaRep.findByName(name)
-                .map(RightEntityMapper::toDomain).orElseThrow(() -> new NotFoundException(name));
+                .map(RightEntityMapper::toDomain).orElseThrow(() -> new NotFoundException(EntityType.RIGHT, name));
     }
 
     @Override

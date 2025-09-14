@@ -1,5 +1,6 @@
 package com.inolraam.basetemplate.domain.service;
 
+import com.inolraam.basetemplate.common.constant.EntityType;
 import com.inolraam.basetemplate.common.constant.Fields;
 import com.inolraam.basetemplate.common.exception.DuplicatedFieldException;
 import com.inolraam.basetemplate.common.exception.NotFoundException;
@@ -18,7 +19,7 @@ public class TypeRightValidator {
 
     public void validateTypeRightExists(long id) {
         if (!typeRightRep.existsById(id)) {
-            throw new NotFoundException(id);
+            throw new NotFoundException(EntityType.TYPE_RIGHT, id);
         }
     }
 
@@ -34,7 +35,7 @@ public class TypeRightValidator {
 
     public void validateTypeRightNotInUse(long id) {
         if (rightRep.existsByIdTypeRight(id)) {
-            throw new ResourceInUseException(id);
+            throw new ResourceInUseException(EntityType.TYPE_RIGHT, id);
         }
     }
 }

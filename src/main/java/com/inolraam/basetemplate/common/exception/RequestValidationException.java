@@ -39,7 +39,7 @@ public class RequestValidationException extends  RuntimeException{
 
     private static Object[] getErrors(InvalidFieldsDto invalidField) {
         final List<Map.Entry<String, String>> errors = new ArrayList<>();
-        errors.add(Map.entry(invalidField.getFieldName(), invalidField.getMessage()));
+        errors.add(Map.entry(invalidField.getField().getLabel(), invalidField.getMessage()));
 
         return errors.toArray();
     }

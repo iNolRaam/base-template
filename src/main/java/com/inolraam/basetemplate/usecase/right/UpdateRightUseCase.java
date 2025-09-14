@@ -4,11 +4,13 @@ import com.inolraam.basetemplate.domain.Right;
 import com.inolraam.basetemplate.domain.port.RightRepository;
 import com.inolraam.basetemplate.domain.service.GlobalValidator;
 import com.inolraam.basetemplate.domain.service.RightValidator;
+import com.inolraam.basetemplate.domain.service.TypeRightValidator;
 import com.inolraam.basetemplate.usecase.UseCase;
 import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
 import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
 import com.inolraam.basetemplate.usecase.right.mapper.RightDomainMapper;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UpdateRightUseCase implements UseCase<UpdateRightInput, RightOutput> {
     private final RightRepository rightRepository;
     private final RightValidator rightValidator;
+    private final TypeRightValidator typeRightValidator;
 
     @Override
     @Transactional
@@ -31,6 +34,7 @@ public class UpdateRightUseCase implements UseCase<UpdateRightInput, RightOutput
     private void validateUpdatingAllowed(Right right) {
         GlobalValidator.validateIdIsPositive(right.getId());
         rightValidator.validateRightExists(right.getId());
+        typeRightValidator.validateTypeRightExists(right.getIdTypeRight());
         rightValidator.validateNameIsUniqueExcludingId(right.getId(), right.getName());
     }
 }

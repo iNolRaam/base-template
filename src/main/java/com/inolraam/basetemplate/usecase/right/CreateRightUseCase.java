@@ -28,5 +28,6 @@ public class CreateRightUseCase implements UseCase<RightInput, RightOutput> {
 
     private void validateCreatingAllowed(Right input) {
         rightValidator.validateNameIsUnique(input.getName());
+        rightValidator.validateTypeRightExists(input.getIdTypeRight());
     }
 }

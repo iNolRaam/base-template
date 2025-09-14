@@ -11,10 +11,12 @@ public final class RightDomainMapper {
     public static RightOutput toOutput(Right right) {
         if (right == null) return null;
 
-        return new RightOutput(
-                right.getId(),
-                right.getName()
-        );
+        return RightOutput.builder()
+                .id(right.getId())
+                .idTypeRight(right.getIdTypeRight())
+                .name(right.getName())
+                .visible(right.getVisible())
+                .build();
     }
 
     public static Right toDomain(long id, RightInput input) {

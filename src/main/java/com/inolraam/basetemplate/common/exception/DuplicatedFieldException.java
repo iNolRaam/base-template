@@ -1,5 +1,7 @@
 package com.inolraam.basetemplate.common.exception;
 
+import com.inolraam.basetemplate.common.constant.Fields;
+
 import lombok.Getter;
 
 @Getter
@@ -8,9 +10,9 @@ public class DuplicatedFieldException extends  RuntimeException{
     private final String fieldName;
     private final String value;
 
-    public DuplicatedFieldException(String fieldName, String value) {
-        super(String.format(DEFAULT_MSG, value, fieldName));
-        this.fieldName = fieldName;
+    public DuplicatedFieldException(Fields field, String value) {
+        super(String.format(DEFAULT_MSG, value, field.getLabel()));
+        this.fieldName = field.getLabel();
         this.value = value;
     }
 }

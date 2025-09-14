@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
@@ -15,7 +14,6 @@ import java.io.Serializable;
 
 @Getter
 @SuperBuilder
-@NoArgsConstructor
 public class BaseSystemCatalogDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -27,4 +25,6 @@ public class BaseSystemCatalogDto implements Serializable {
 
     @NotNull(message = MessageCodes.NOT_NULL)
     private Boolean visible;
+
+    protected BaseSystemCatalogDto(){}
 }

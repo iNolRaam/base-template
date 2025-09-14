@@ -3,6 +3,7 @@ package com.inolraam.basetemplate.adapter.out.jpa;
 import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
 import com.inolraam.basetemplate.adapter.out.jpa.mapper.TypeRightEntityMapper;
 import com.inolraam.basetemplate.adapter.out.jpa.repository.TypeRightJpaRepository;
+import com.inolraam.basetemplate.common.constant.EntityType;
 import com.inolraam.basetemplate.common.exception.NotFoundException;
 import com.inolraam.basetemplate.domain.TypeRight;
 import com.inolraam.basetemplate.domain.port.TypeRightRepository;
@@ -31,12 +32,14 @@ public class TypeRightRepositoryAdapter implements TypeRightRepository {
 
     @Override
     public TypeRight findById(long id) {
-        return typeRightJpaRep.findById(id).map(TypeRightEntityMapper::toDomain).orElseThrow(() -> new NotFoundException(id));
+        return typeRightJpaRep.findById(id).map(TypeRightEntityMapper::toDomain)
+                .orElseThrow(() -> new NotFoundException(EntityType.TYPE_RIGHT, id));
     }
 
     @Override
     public TypeRight findByName(String name) {
-        return typeRightJpaRep.findByName(name).map(TypeRightEntityMapper::toDomain).orElseThrow(() -> new NotFoundException(name));
+        return typeRightJpaRep.findByName(name).map(TypeRightEntityMapper::toDomain)
+                .orElseThrow(() -> new NotFoundException(EntityType.TYPE_RIGHT, name));
     }
 
     @Override

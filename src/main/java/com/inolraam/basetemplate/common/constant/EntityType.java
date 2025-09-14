@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum Fields {
-    NAME("name"),
-    ID("id");
+public enum EntityType {
+    RIGHT("Right"),
+    TYPE_RIGHT("Type Right"),
+    ROLE("Role"),
+    ROLE_RIGHT("Role Right");
 
     private final String label;
 }
