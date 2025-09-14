@@ -7,8 +7,6 @@ import lombok.Getter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Map;
-import java.util.Objects;
 
 @Getter
 @Builder
@@ -18,5 +16,5 @@ public class ErrorResponse implements Serializable, Response {
     private static final long serialVersionUID = 1L;
 
     private String errorMessage;
-    private Object[] InvalidFields;
+    private Object[] invalidFields;
 }

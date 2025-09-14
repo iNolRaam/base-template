@@ -10,7 +10,6 @@ import com.inolraam.basetemplate.usecase.UseCaseVoid;
 import com.inolraam.basetemplate.usecase.right.dto.RightInput;
 import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
 import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
-import com.inolraam.basetemplate.usecase.typeright.dto.TypeRightOutput;
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,5 @@
 package com.inolraam.basetemplate.adapter.out.jpa.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

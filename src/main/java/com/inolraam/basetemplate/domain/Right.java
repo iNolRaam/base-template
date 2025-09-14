@@ -2,7 +2,6 @@ package com.inolraam.basetemplate.domain;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.stereotype.Service;
 
 
 @Getter

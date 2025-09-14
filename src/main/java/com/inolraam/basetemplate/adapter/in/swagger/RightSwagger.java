@@ -6,7 +6,6 @@ import com.inolraam.basetemplate.adapter.in.swagger.constant.ResponseDescription
 import com.inolraam.basetemplate.adapter.in.swagger.constant.Tag;
 import com.inolraam.basetemplate.usecase.right.dto.RightInput;
 import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
-import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

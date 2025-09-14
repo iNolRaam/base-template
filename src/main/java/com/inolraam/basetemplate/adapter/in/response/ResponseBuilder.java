@@ -5,9 +5,6 @@ import com.inolraam.basetemplate.adapter.in.response.dto.SuccessResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Map;
-import java.util.Objects;
-
 public final class ResponseBuilder {
     private ResponseBuilder() {}
 
@@ -45,7 +42,7 @@ public final class ResponseBuilder {
     private static Response buildErrorResponse(String generalError, Object[] fieldsWithErrors) {
         return ErrorResponse.builder()
                 .errorMessage(generalError)
-                .InvalidFields(fieldsWithErrors)
+                .invalidFields(fieldsWithErrors)
                 .build();
     }
 }
