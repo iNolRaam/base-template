@@ -28,11 +28,7 @@ src
 │       └── db
 │           └── migration
 │               └── V1__Initial_setup.sql
-└── test
-    └── java
-        └── com
-            └── example
-                └── HelloControllerTest.java
+
 ```
 
 ## Developer Profile
