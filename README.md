@@ -1,13 +1,60 @@
-# base-template
-It's a base template for my projects using Springboot 3
+# Base Template
 
+A base template for Spring Boot 3 projects following hexagonal architecture principles.
 
-Developer profile: Clean, package and re-create database:
+## Project Structure
+
+```
+src
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── example
+│   │           ├── Application.java
+│   │           ├── adapter
+│   │           │   ├── in
+│   │           │   │   └── web
+│   │           │   │       ├── HelloController.java
+│   │           │   │       └── SwaggerConfig.java
+│   │           │   └── out
+│   │           │       └── persistence
+│   │           │           ├── HelloEntity.java
+│   │           │           └── HelloRepository.java
+│   │           └── domain
+│   │               └── Hello.java
+│   └── resources
+│       ├── application-dev.yml
+│       ├── application-prod.yml
+│       └── db
+│           └── migration
+│               └── V1__Initial_setup.sql
+└── test
+    └── java
+        └── com
+            └── example
+                └── HelloControllerTest.java
+```
+
+## Developer Profile
+
+To clean, package, and re-create the database in the development environment, use the following command:
+
+```
 mvn clean package -DsqlMode=always -Dprofile=dev
+```
 
-Production profile: Clean, package and re-create database:
+## Production Profile
+
+To clean, package, and re-create the database in the production environment, use the following command:
+
+```
 mvn clean package -DsqlMode=always -Dprofile=prod
+```
 
+## Swagger Page
 
-Swagger page:
+The Swagger UI can be accessed at the following URL:
+
+```
 http://localhost:8080/swagger-ui/index.html
+```
