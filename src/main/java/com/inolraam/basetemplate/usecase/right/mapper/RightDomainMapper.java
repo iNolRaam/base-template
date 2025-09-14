@@ -2,12 +2,11 @@ package com.inolraam.basetemplate.usecase.right.mapper;
 
 import com.inolraam.basetemplate.domain.Right;
 import com.inolraam.basetemplate.usecase.right.dto.RightInput;
-import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
 import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
 
-public final class RightDtoMapper {
+public final class RightDomainMapper {
 
-    private RightDtoMapper() {}
+    private RightDomainMapper() {}
 
     public static RightOutput toOutput(Right right) {
         if (right == null) return null;
@@ -18,20 +17,29 @@ public final class RightDtoMapper {
         );
     }
 
-    public static Right toDomain(UpdateRightInput input) {
+    public static Right toDomain(long id, RightInput input) {
         if (input == null) return null;
+        final String formattedName = formatNameToDomain(input.getName());
         return Right.builder()
-                .id(input.getId())
-                .idTypeRight(input.getIdTypoRight())
+                .id(id)
+                .idTypeRight(input.getIdTypeRight())
+                .name(formattedName)
                 .visible(input.getVisible())
                 .build();
     }
 
     public static Right toDomain(RightInput input) {
         if (input == null) return null;
+        final String formattedName = formatNameToDomain(input.getName());
         return Right.builder()
-                .idTypeRight(input.getIdTypoRight())
+                .idTypeRight(input.getIdTypeRight())
+                .name(formattedName)
                 .visible(input.getVisible())
                 .build();
     }
+
+    private static String formatNameToDomain(String name) {
+        return name.toLowerCase();
+    }
+
 }

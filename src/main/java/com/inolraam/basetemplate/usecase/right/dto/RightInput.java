@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class RightInput extends BaseSystemCatalogDto {
     @Positive
-    private long idTypoRight;
+    private long idTypeRight;
 }

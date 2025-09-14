@@ -1,15 +1,16 @@
 package com.inolraam.basetemplate.adapter.out.jpa.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "roles_rights")
-public class RoleRight extends AuditableEntity {
+@EqualsAndHashCode(callSuper = false)
+public class RoleRightEntity extends AuditableEntity {
     @EmbeddedId
     private RoleRightPK id;
 

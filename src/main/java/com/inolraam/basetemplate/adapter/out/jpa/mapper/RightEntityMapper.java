@@ -6,6 +6,8 @@ import com.inolraam.basetemplate.domain.Right;
 
 public final class RightEntityMapper {
 
+    private RightEntityMapper() {}
+
     public static RightEntity toEntity(Right right) {
         if (right == null) return null;
 
@@ -13,6 +15,7 @@ public final class RightEntityMapper {
         entity.setId(right.getId());
         entity.setIdTypeRight(new TypeRightEntity(right.getIdTypeRight()));
         entity.setName(right.getName());
+        entity.setVisible(right.getVisible());
 
         return entity;
     }
@@ -22,6 +25,7 @@ public final class RightEntityMapper {
 
         return Right.builder()
                 .id(entity.getId())
+                .name(entity.getName())
                 .idTypeRight(entity.getIdTypeRight().getId())
                 .visible(entity.getVisible())
                 .build();

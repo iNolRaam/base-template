@@ -3,9 +3,9 @@ package com.inolraam.basetemplate.adapter.out.jpa.mapper;
 import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
 import com.inolraam.basetemplate.domain.TypeRight;
 
-import java.util.Optional;
-
 public final class TypeRightEntityMapper {
+
+    private TypeRightEntityMapper() {}
 
     public static TypeRight toDomain(TypeRightEntity entity) {
         if(entity == null) return null;
@@ -18,8 +18,8 @@ public final class TypeRightEntityMapper {
 
     public static TypeRightEntity toEntity(TypeRight domain) {
         if(domain == null) return null;
-        long id = Optional.ofNullable(domain.getId()).orElse(0L);
-        final TypeRightEntity entity = new TypeRightEntity(id);
+        final TypeRightEntity entity = new TypeRightEntity();
+        entity.setId(domain.getId());
         entity.setName(domain.getName());
         entity.setVisible(domain.getVisible());
         return entity;
