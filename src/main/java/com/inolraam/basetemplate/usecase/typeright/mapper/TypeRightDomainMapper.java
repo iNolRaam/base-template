@@ -6,6 +6,8 @@ import com.inolraam.basetemplate.usecase.typeright.dto.TypeRightOutput;
 
 public final class TypeRightDomainMapper {
 
+    private TypeRightDomainMapper() {}
+
     public static TypeRight toDomain(TypeRightInput input) {
         if (input == null) return null;
         final String formattedName = formatNameToDomain(input.getName());

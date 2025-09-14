@@ -7,10 +7,10 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @Getter
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 public class BaseCatalog implements Serializable {
     @Serial
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     protected Long id;
     protected String name;
