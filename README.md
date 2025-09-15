@@ -39,6 +39,12 @@ To clean, package, and re-create the database in the development environment, us
 mvn clean package -DsqlMode=always -Dprofile=dev
 ```
 
+To enable and disable integration tests
+```
+mvn test -Dtestcontainers=enabled
+mvn test -Dtestcontainers=disabled
+´´´
+
 ## Production Profile
 
 To clean, package, and re-create the database in the production environment, use the following command:
@@ -46,6 +52,8 @@ To clean, package, and re-create the database in the production environment, use
 ```
 mvn clean package -DsqlMode=always -Dprofile=prod
 ```
+
+mvn surefire-report:report && start target/reports/surefire.html
 
 ## Swagger Page
 
