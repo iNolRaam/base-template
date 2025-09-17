@@ -45,4 +45,35 @@ class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
         assertThat(found).isPresent();
         assertThat(found.get().getName()).isEqualTo(testEntity.getName());
     }
+
+    @Test
+    void shouldCheckIfExistsByName() {
+        typeRightJpaRepository.save(testEntity);
+
+        boolean exists = typeRightJpaRepository.existsByName("TEST_TYPE");
+        boolean nonExistent = typeRightJpaRepository.existsByName("NON_EXISTENT");
+
+        assertThat(exists).isTrue();
+        assertThat(nonExistent).isFalse();
+    }
+
+    @Test
+    void shouldCheckIfExistsByIdNotAndName() {
+        TypeRightEntity savedEntity1 = typeRightJpaRepository.save(testEntity);
+
+        TypeRightEntity anotherEntity = new TypeRightEntity();
+        anotherEntity.setName("ANOTHER_TEST_TYPE");
+        anotherEntity.setVisible(true);
+        anotherEntity.setCreatedBy("test");
+        anotherEntity.setCreatedAt(new Date());
+        TypeRightEntity savedEntity2 = typeRightJpaRepository.save(anotherEntity);
+
+        boolean exists = typeRightJpaRepository.existsByIdNotAndName(savedEntity2.getId(), savedEntity1.getName());
+        boolean nonExistent = typeRightJpaRepository.existsByIdNotAndName(savedEntity1.getId(), savedEntity1.getName());
+        boolean nonExistent2 = typeRightJpaRepository.existsByIdNotAndName(savedEntity1.getId(), "some_other_name");
+
+        assertThat(exists).isTrue();
+        assertThat(nonExistent).isFalse();
+        assertThat(nonExistent2).isFalse();
+    }
 }
