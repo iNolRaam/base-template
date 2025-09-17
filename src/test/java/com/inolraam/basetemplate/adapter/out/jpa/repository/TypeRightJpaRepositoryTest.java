@@ -21,7 +21,7 @@ class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
     @BeforeEach
     void setUp() {
         testEntity = new TypeRightEntity();
-        testEntity.setName("TEST_TYPE");
+        testEntity.setName("test_type");
         testEntity.setVisible(true);
         testEntity.setCreatedBy("test");
         testEntity.setCreatedAt(new Date());
@@ -50,8 +50,8 @@ class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
     void shouldCheckIfExistsByName() {
         typeRightJpaRepository.save(testEntity);
 
-        boolean exists = typeRightJpaRepository.existsByName("TEST_TYPE");
-        boolean nonExistent = typeRightJpaRepository.existsByName("NON_EXISTENT");
+        boolean exists = typeRightJpaRepository.existsByName("test_type");
+        boolean nonExistent = typeRightJpaRepository.existsByName("non_existent_type");
 
         assertThat(exists).isTrue();
         assertThat(nonExistent).isFalse();
@@ -62,7 +62,7 @@ class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
         TypeRightEntity savedEntity1 = typeRightJpaRepository.save(testEntity);
 
         TypeRightEntity anotherEntity = new TypeRightEntity();
-        anotherEntity.setName("ANOTHER_TEST_TYPE");
+        anotherEntity.setName("another_test_type");
         anotherEntity.setVisible(true);
         anotherEntity.setCreatedBy("test");
         anotherEntity.setCreatedAt(new Date());

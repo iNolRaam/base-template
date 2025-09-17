@@ -2,24 +2,29 @@ package com.inolraam.basetemplate.adapter.out.jpa.repository;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @DataJpaTest
 @Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql(scripts = "classpath:DDL/schema.sql")
+@ActiveProfiles("test")
 public abstract class BaseRepositoryTest {
 
-    @Container
-    protected static final PostgreSQLContainer<?> POSTGRES_CONTAINER = new PostgreSQLContainer<>("postgres:15.2")
-            .withDatabaseName("testdb")
-            .withUsername("test")
-            .withPassword("test");
+    private static final PostgreSQLContainer<?> POSTGRES_CONTAINER;
+
+    static {
+        POSTGRES_CONTAINER = new PostgreSQLContainer<>("postgres:15.2")
+                .withDatabaseName("testdb")
+                .withUsername("test")
+                .withPassword("test");
+        POSTGRES_CONTAINER.start();
+    }
 
     @DynamicPropertySource
     static void registerProperties(DynamicPropertyRegistry registry) {
