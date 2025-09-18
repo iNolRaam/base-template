@@ -1,57 +1,72 @@
 package com.inolraam.basetemplate.adapter.out.jpa.repository;
 
+import com.inolraam.basetemplate.adapter.out.jpa.entity.RightEntity;
 import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
+    private static final String TEST_TYPE_RIGHT ="test_type_right";
+    private static final String TEST_TYPE_RIGHT_TWO ="test_type_right_two";
+    private static final String CREATED_BY ="user_test";
+    private static final String NON_EXISTENT ="non_existent";
 
     @Autowired
     private TypeRightJpaRepository typeRightJpaRepository;
 
-    private TypeRightEntity testEntity;
+    private TypeRightEntity typeRightEntity;
+    private TypeRightEntity typeRightTwoEntity;
 
     @BeforeEach
     void setUp() {
-        testEntity = new TypeRightEntity();
-        testEntity.setName("test_type");
-        testEntity.setVisible(true);
-        testEntity.setCreatedBy("test");
-        testEntity.setCreatedAt(new Date());
+        typeRightEntity = new TypeRightEntity();
+        typeRightEntity.setName(TEST_TYPE_RIGHT);
+        typeRightEntity.setVisible(true);
+        typeRightEntity.setCreatedBy(CREATED_BY);
+        typeRightEntity.setCreatedAt(new Date());
+
+        typeRightTwoEntity = new TypeRightEntity();
+        typeRightTwoEntity.setName(TEST_TYPE_RIGHT_TWO);
+        typeRightTwoEntity.setVisible(true);
+        typeRightTwoEntity.setCreatedBy(CREATED_BY);
+        typeRightTwoEntity.setCreatedAt(new Date());
     }
+
 
     @Test
     void shouldSaveTypeRight() {
-        TypeRightEntity savedEntity = typeRightJpaRepository.save(testEntity);
+        TypeRightEntity savedEntity = typeRightJpaRepository.save(typeRightEntity);
         
         assertThat(savedEntity).isNotNull();
         assertThat(savedEntity.getId()).isNotNull();
-        assertThat(savedEntity.getName()).isEqualTo(testEntity.getName());
+        assertThat(savedEntity.getName()).isEqualTo(typeRightEntity.getName());
     }
 
     @Test
     void shouldFindTypeRightById() {
-        TypeRightEntity savedEntity = typeRightJpaRepository.save(testEntity);
+        TypeRightEntity savedEntity = typeRightJpaRepository.save(typeRightEntity);
         
         Optional<TypeRightEntity> found = typeRightJpaRepository.findById(savedEntity.getId());
         
         assertThat(found).isPresent();
-        assertThat(found.get().getName()).isEqualTo(testEntity.getName());
+        assertThat(found.get().getName()).isEqualTo(typeRightEntity.getName());
     }
 
     @Test
     void shouldCheckIfExistsByName() {
-        typeRightJpaRepository.save(testEntity);
+        typeRightJpaRepository.save(typeRightEntity);
 
-        boolean exists = typeRightJpaRepository.existsByName("test_type");
-        boolean nonExistent = typeRightJpaRepository.existsByName("non_existent_type");
+        boolean exists = typeRightJpaRepository.existsByName(TEST_TYPE_RIGHT);
+        boolean nonExistent = typeRightJpaRepository.existsByName(NON_EXISTENT);
 
         assertThat(exists).isTrue();
         assertThat(nonExistent).isFalse();
@@ -59,21 +74,35 @@ class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
 
     @Test
     void shouldCheckIfExistsByIdNotAndName() {
-        TypeRightEntity savedEntity1 = typeRightJpaRepository.save(testEntity);
-
-        TypeRightEntity anotherEntity = new TypeRightEntity();
-        anotherEntity.setName("another_test_type");
-        anotherEntity.setVisible(true);
-        anotherEntity.setCreatedBy("test");
-        anotherEntity.setCreatedAt(new Date());
-        TypeRightEntity savedEntity2 = typeRightJpaRepository.save(anotherEntity);
+        TypeRightEntity savedEntity1 = typeRightJpaRepository.save(typeRightEntity);
+        TypeRightEntity savedEntity2 = typeRightJpaRepository.save(typeRightTwoEntity);
 
         boolean exists = typeRightJpaRepository.existsByIdNotAndName(savedEntity2.getId(), savedEntity1.getName());
         boolean nonExistent = typeRightJpaRepository.existsByIdNotAndName(savedEntity1.getId(), savedEntity1.getName());
-        boolean nonExistent2 = typeRightJpaRepository.existsByIdNotAndName(savedEntity1.getId(), "some_other_name");
+        boolean nonExistent2 = typeRightJpaRepository.existsByIdNotAndName(savedEntity1.getId(), NON_EXISTENT);
 
         assertThat(exists).isTrue();
         assertThat(nonExistent).isFalse();
         assertThat(nonExistent2).isFalse();
+    }
+
+    @Test
+    void shouldFailWhenSavingRightWithDuplicateName() {
+        // First save
+        typeRightJpaRepository.save(typeRightEntity);
+        typeRightJpaRepository.flush(); // Important: force write to DB
+
+        // Create another entity with the same name
+        TypeRightEntity duplicateRight = new TypeRightEntity();
+        duplicateRight.setName(TEST_TYPE_RIGHT); // Same name as rightEntity
+        duplicateRight.setVisible(true);
+        duplicateRight.setCreatedBy(CREATED_BY);
+        duplicateRight.setCreatedAt(new Date());
+
+        // This should throw DataIntegrityViolationException
+        assertThatThrownBy(() -> {
+            typeRightJpaRepository.save(duplicateRight);
+            typeRightJpaRepository.flush(); // Important: force write to DB
+        }).isInstanceOf(DataIntegrityViolationException.class);
     }
 }
