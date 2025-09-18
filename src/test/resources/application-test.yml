@@ -1,5 +1,8 @@
 spring:
-  # Configuración específica para pruebas
+  datasource:
+    url: jdbc:tc:postgresql:15.2:///testdb
+    username: test
+    password: test
   jpa:
     properties:
       hibernate:
@@ -8,3 +11,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:DDL/schema.sql
