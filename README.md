@@ -53,7 +53,17 @@ To clean, package, and re-create the database in the production environment, use
 mvn clean package -DsqlMode=always -Dprofile=prod
 ```
 
+
+To test a specific test suit
+```
+mvn clean test -Ptest -Dtest=ProfileJpaRepositoryTest
+```
+
+To generate a report and html report
+```
 mvn surefire-report:report && start target/reports/surefire.html
+```
+
 
 ## Swagger Page
 

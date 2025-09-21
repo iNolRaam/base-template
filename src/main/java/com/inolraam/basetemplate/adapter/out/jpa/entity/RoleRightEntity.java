@@ -16,7 +16,7 @@ public class RoleRightEntity extends AuditableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", nullable = false, insertable = false, updatable = false)
-    private Role idRole;
+    private RoleEntity idRole;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_right", nullable = false, insertable = false, updatable = false)

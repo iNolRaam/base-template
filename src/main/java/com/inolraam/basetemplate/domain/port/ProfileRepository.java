@@ -3,16 +3,23 @@ package com.inolraam.basetemplate.domain.port;
 import com.inolraam.basetemplate.domain.Profile;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProfileRepository {
-    Profile save(Profile p);
+    Profile save(Profile profile);
 
-    Optional<Profile> findById(String id);
+    Profile update(Profile profile);
 
-    Optional<Profile> findByName(String name);
+    Profile findById(long id);
+
+    Profile findByName(String name);
 
     List<Profile> findAll();
 
-    void deleteById(String id);
+    boolean existsById(long id);
+
+    boolean existsByName(String name);
+
+    boolean existsByIdNotAndName(long id, String name);
+
+    void deleteById(long id);
 }

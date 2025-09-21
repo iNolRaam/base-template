@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "roles")
-public class Role extends BaseCatalogEntity {
+public class RoleEntity extends BaseCatalogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
