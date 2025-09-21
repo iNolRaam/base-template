@@ -4,9 +4,11 @@ import com.inolraam.basetemplate.adapter.in.constant.ApiPaths;
 import com.inolraam.basetemplate.adapter.in.response.*;
 import com.inolraam.basetemplate.adapter.in.swagger.TypeRightSwagger;
 import com.inolraam.basetemplate.common.exception.RequestValidationException;
-import com.inolraam.basetemplate.usecase.UseCaseVoid;
+import com.inolraam.basetemplate.usecase.typeright.CreateTypeRightUseCase;
+import com.inolraam.basetemplate.usecase.typeright.DeleteTypeRightUseCase;
+import com.inolraam.basetemplate.usecase.typeright.ReadTypeRightUseCase;
+import com.inolraam.basetemplate.usecase.typeright.UpdateTypeRightUseCase;
 import com.inolraam.basetemplate.usecase.typeright.dto.*;
-import com.inolraam.basetemplate.usecase.UseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(ApiPaths.TYPE_RIGHTS)
 public class TypeRightController implements TypeRightSwagger {
-    private final UseCase<TypeRightInput, TypeRightOutput> createTypeRightUseCase;
-    private final UseCaseVoid<Long> deleteTypeRightUseCase;
-    private final UseCase<UpdateTypeRightInput, TypeRightOutput> updateTypeRightUseCase;
-    private final UseCase<Long, TypeRightOutput> readTypeRightUseCase;
+    private final CreateTypeRightUseCase createTypeRightUseCase;
+    private final DeleteTypeRightUseCase deleteTypeRightUseCase;
+    private final UpdateTypeRightUseCase updateTypeRightUseCase;
+    private final ReadTypeRightUseCase readTypeRightUseCase;
 
     @PostMapping
     public ResponseEntity<Response> createTypeRight(@Valid @RequestBody TypeRightInput input, BindingResult result) {

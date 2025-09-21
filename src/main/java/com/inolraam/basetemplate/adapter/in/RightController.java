@@ -5,8 +5,10 @@ import com.inolraam.basetemplate.adapter.in.response.Response;
 import com.inolraam.basetemplate.adapter.in.response.ResponseBuilder;
 import com.inolraam.basetemplate.adapter.in.swagger.RightSwagger;
 import com.inolraam.basetemplate.common.exception.RequestValidationException;
-import com.inolraam.basetemplate.usecase.UseCase;
-import com.inolraam.basetemplate.usecase.UseCaseVoid;
+import com.inolraam.basetemplate.usecase.right.CreateRightUseCase;
+import com.inolraam.basetemplate.usecase.right.DeleteRightUseCase;
+import com.inolraam.basetemplate.usecase.right.ReadRightUseCase;
+import com.inolraam.basetemplate.usecase.right.UpdateRightUseCase;
 import com.inolraam.basetemplate.usecase.right.dto.RightInput;
 import com.inolraam.basetemplate.usecase.right.dto.RightOutput;
 import com.inolraam.basetemplate.usecase.right.dto.UpdateRightInput;
@@ -22,10 +24,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping(ApiPaths.RIGHTS)
 public class RightController implements RightSwagger {
-    private final UseCase<RightInput, RightOutput> createRightUseCase;
-    private final UseCaseVoid<Long> deleteRightUseCase;
-    private final UseCase<UpdateRightInput, RightOutput> updateRightUseCase;
-    private final UseCase<Long, RightOutput> readRightUseCase;
+    private final CreateRightUseCase createRightUseCase;
+    private final DeleteRightUseCase deleteRightUseCase;
+    private final UpdateRightUseCase updateRightUseCase;
+    private final ReadRightUseCase readRightUseCase;
 
     @Override
     @PostMapping

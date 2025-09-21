@@ -4,9 +4,11 @@ import com.inolraam.basetemplate.adapter.in.constant.ApiPaths;
 import com.inolraam.basetemplate.adapter.in.response.*;
 import com.inolraam.basetemplate.adapter.in.swagger.ProfileSwagger;
 import com.inolraam.basetemplate.common.exception.RequestValidationException;
-import com.inolraam.basetemplate.usecase.UseCaseVoid;
+import com.inolraam.basetemplate.usecase.profile.CreateProfileUseCase;
+import com.inolraam.basetemplate.usecase.profile.DeleteProfileUseCase;
+import com.inolraam.basetemplate.usecase.profile.ReadProfileUseCase;
+import com.inolraam.basetemplate.usecase.profile.UpdateProfileUseCase;
 import com.inolraam.basetemplate.usecase.profile.dto.*;
-import com.inolraam.basetemplate.usecase.UseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(ApiPaths.PROFILES)
 public class ProfileController implements ProfileSwagger {
-    private final UseCase<ProfileInput, ProfileOutput> createProfileUseCase;
-    private final UseCaseVoid<ProfileIDInput> deleteProfileUseCase;
-    private final UseCase<UpdateProfileInput, ProfileOutput> updateProfileUseCase;
-    private final UseCase<Long, ProfileOutput> readProfileUseCase;
+    private final CreateProfileUseCase createProfileUseCase;
+    private final DeleteProfileUseCase deleteProfileUseCase;
+    private final UpdateProfileUseCase updateProfileUseCase;
+    private final ReadProfileUseCase readProfileUseCase;
 
     @PostMapping
     public ResponseEntity<Response> createProfile(@Valid @RequestBody ProfileInput input, BindingResult result) {

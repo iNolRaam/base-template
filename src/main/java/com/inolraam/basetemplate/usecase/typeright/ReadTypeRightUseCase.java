@@ -1,29 +1,11 @@
 package com.inolraam.basetemplate.usecase.typeright;
 
-import com.inolraam.basetemplate.domain.TypeRight;
-import com.inolraam.basetemplate.domain.port.TypeRightRepository;
-import com.inolraam.basetemplate.domain.service.GlobalValidator;
-import com.inolraam.basetemplate.usecase.UseCase;
+import com.inolraam.basetemplate.usecase.GenericUseCase;
 import com.inolraam.basetemplate.usecase.typeright.dto.TypeRightOutput;
-import com.inolraam.basetemplate.usecase.typeright.mapper.TypeRightDomainMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@RequiredArgsConstructor
-public class ReadTypeRightUseCase  implements UseCase<Long, TypeRightOutput> {
-    private final TypeRightRepository typeRightRepository;
-
-    @Override
-    @Transactional(readOnly = true)
-    public TypeRightOutput execute(Long input) {
-        validateReadingAllowed(input);
-        final TypeRight typeRight = typeRightRepository.findById(input);
-        return TypeRightDomainMapper.toOutput(typeRight);
-    }
-
-    private void validateReadingAllowed(Long input){
-        GlobalValidator.validateIdIsPositive(input);
-    }
+/**
+ * Interface for reading a type right use case.
+ */
+public interface ReadTypeRightUseCase extends GenericUseCase {
+    TypeRightOutput execute(Long input);
 }
