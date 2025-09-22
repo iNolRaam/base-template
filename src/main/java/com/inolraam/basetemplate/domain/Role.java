@@ -26,4 +26,20 @@ public class Role extends BaseCatalog {
     public Set<Long> getRights() {
         return Collections.unmodifiableSet(rights);
     }
+
+    public Role updateWith(Role newData) {
+        // Create updated role with new data
+        Role updatedRole = Role.builder()
+                .id(this.getId())
+                .name(newData.getName())
+                .visible(newData.getVisible())
+                .build();
+        
+        // Add rights from new data
+        if (newData.getRights() != null) {
+            newData.getRights().forEach(updatedRole::addRight);
+        }
+        
+        return updatedRole;
+    }
 }

@@ -9,6 +9,7 @@ public final class ApiPaths {
     public static final String TYPE_RIGHTS = ACCESS_MANAGEMENT + "/type-rights";
     public static final String RIGHTS = ACCESS_MANAGEMENT + "/rights";
     public static final String PROFILES = ACCESS_MANAGEMENT + "/profiles";
+    public static final String ROLES = ACCESS_MANAGEMENT + "/roles";
 
     public static final String USERS = BASE + "/users";
 }

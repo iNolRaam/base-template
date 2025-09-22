@@ -34,7 +34,7 @@ public class AuditableEntity implements Serializable {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt = new Date(); //TODO remove default value
+    private Date createdAt;
 
     @LastModifiedBy
     @Column(name = "updated_by", length = 100, insertable = false)

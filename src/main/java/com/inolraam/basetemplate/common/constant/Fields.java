@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Fields {
     NAME("name"),
-    ID("id");
+    ID("id"),
+    RIGHTS("rights");
 
     private final String label;
 }

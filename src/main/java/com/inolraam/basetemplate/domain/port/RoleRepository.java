@@ -2,17 +2,20 @@ package com.inolraam.basetemplate.domain.port;
 
 import com.inolraam.basetemplate.domain.Role;
 
-import java.util.List;
-import java.util.Optional;
-
 public interface RoleRepository {
     Role save(Role role);
 
-    Optional<Role> findById(long id);
+    Role update(Role role);
 
-    Optional<Role> findByName(String name);
+    Role findById(long id);
 
-    List<Role> findAll();
+    Role findByName(String name);
+
+    boolean existsById(long id);
+
+    boolean existsByName(String name);
+
+    boolean existsByIdNotAndName(long id, String name);
 
     void deleteById(long id);
 }
