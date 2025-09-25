@@ -1,6 +1,5 @@
 package com.inolraam.basetemplate.adapter.out.jpa.repository;
 
-import com.inolraam.basetemplate.adapter.out.jpa.entity.RightEntity;
 import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,13 +31,13 @@ class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
         typeRightEntity.setName(TEST_TYPE_RIGHT);
         typeRightEntity.setVisible(true);
         typeRightEntity.setCreatedBy(CREATED_BY);
-        typeRightEntity.setCreatedAt(new Date());
+        typeRightEntity.setCreatedAt(LocalDateTime.now());
 
         typeRightTwoEntity = new TypeRightEntity();
         typeRightTwoEntity.setName(TEST_TYPE_RIGHT_TWO);
         typeRightTwoEntity.setVisible(true);
         typeRightTwoEntity.setCreatedBy(CREATED_BY);
-        typeRightTwoEntity.setCreatedAt(new Date());
+        typeRightTwoEntity.setCreatedAt(LocalDateTime.now());
     }
 
 
@@ -97,7 +96,7 @@ class TypeRightJpaRepositoryTest extends BaseRepositoryTest {
         duplicateRight.setName(TEST_TYPE_RIGHT); // Same name as rightEntity
         duplicateRight.setVisible(true);
         duplicateRight.setCreatedBy(CREATED_BY);
-        duplicateRight.setCreatedAt(new Date());
+        duplicateRight.setCreatedAt(LocalDateTime.now());
 
         // This should throw DataIntegrityViolationException
         assertThatThrownBy(() -> {

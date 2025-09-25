@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +37,7 @@ class RoleJpaRepositoryTest extends BaseRepositoryTest {
         roleEntity.setName(TEST_ROLE_NAME);
         roleEntity.setVisible(true);
         roleEntity.setCreatedBy(CREATED_BY);
-        roleEntity.setCreatedAt(new Date());
+        roleEntity.setCreatedAt(LocalDateTime.now());
         // No asignamos rights para evitar problemas de constraints
 
         // Create second role entity for testing
@@ -45,7 +45,7 @@ class RoleJpaRepositoryTest extends BaseRepositoryTest {
         roleTwoEntity.setName(TEST_ROLE_TWO);
         roleTwoEntity.setVisible(true);
         roleTwoEntity.setCreatedBy(CREATED_BY);
-        roleTwoEntity.setCreatedAt(new Date());
+        roleTwoEntity.setCreatedAt(LocalDateTime.now());
         // No asignamos rights para evitar problemas de constraints
     }
 

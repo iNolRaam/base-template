@@ -25,27 +25,31 @@ import org.springframework.http.MediaType;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Base-Template",
-                description = "A breve description about base-template",
-                termsOfService = "www.inolraam.com/terms-and-service",
-                version = "1.0.0",
+                title = "Base-Template API",
+                description = "Comprehensive REST API for Base Template application - Spring Boot 4 & SpringDoc 3.x compatible",
+                termsOfService = "https://www.inolraam.com/terms-and-service",
+                version = "2.0.0-SB4",
                 license = @License(
-                        name = "Standard Software",
-                        url = "www.inolraam.com/license"
+                        name = "Standard Software License",
+                        url = "https://www.inolraam.com/license"
                 ),
                 contact = @Contact(
                         name = "Marlon Castillo",
                         email = "aac.marlondv@gmail.com",
-                        url = "www.inolraam.com"
+                        url = "https://www.inolraam.com"
                 )
         ),
         servers = {
                 @Server(
                         url = "http://localhost:8080",
-                        description = "Dev environment"
+                        description = "Development environment - Spring Boot 4"
                 ),
                 @Server(
-                        url = "http://www.inolraam.com",
+                        url = "http://localhost:8085",
+                        description = "Alternative development port"
+                ),
+                @Server(
+                        url = "https://www.inolraam.com",
                         description = "Production environment"
                 )
         },

@@ -14,7 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -32,9 +32,8 @@ public class AuditableEntity implements Serializable {
 
     @CreatedDate
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedBy
     @Column(name = "updated_by", length = 100, insertable = false)
@@ -42,7 +41,6 @@ public class AuditableEntity implements Serializable {
     private String updatedBy;
 
     @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "lst_updated_at", insertable = false)
-    private Date lastUpdatedAt;
+    private LocalDateTime lastUpdatedAt;
 }

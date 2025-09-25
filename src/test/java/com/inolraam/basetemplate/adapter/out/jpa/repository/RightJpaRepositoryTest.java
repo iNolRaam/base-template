@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +38,7 @@ class RightJpaRepositoryTest extends BaseRepositoryTest {
         typeRightEntity.setName(TEST_TYPE_RIGHT);
         typeRightEntity.setVisible(true);
         typeRightEntity.setCreatedBy(CREATED_BY);
-        typeRightEntity.setCreatedAt(new Date());
+        typeRightEntity.setCreatedAt(LocalDateTime.now());
         typeRightEntity = typeRightJpaRepository.save(typeRightEntity);
 
         // Create right entity for testing
@@ -46,14 +46,14 @@ class RightJpaRepositoryTest extends BaseRepositoryTest {
         rightEntity.setName(TEST_RIGHT);
         rightEntity.setVisible(true);
         rightEntity.setCreatedBy(CREATED_BY);
-        rightEntity.setCreatedAt(new Date());
+        rightEntity.setCreatedAt(LocalDateTime.now());
         rightEntity.setIdTypeRight(typeRightEntity);
 
         rightTwoEntity = new RightEntity();
         rightTwoEntity.setName(TEST_RIGHT_TWO);
         rightTwoEntity.setVisible(true);
         rightTwoEntity.setCreatedBy(CREATED_BY);
-        rightTwoEntity.setCreatedAt(new Date());
+        rightTwoEntity.setCreatedAt(LocalDateTime.now());
         rightTwoEntity.setIdTypeRight(typeRightEntity);
     }
 
@@ -130,7 +130,7 @@ class RightJpaRepositoryTest extends BaseRepositoryTest {
         duplicateRight.setName(TEST_RIGHT); // Same name as rightEntity
         duplicateRight.setVisible(true);
         duplicateRight.setCreatedBy(CREATED_BY);
-        duplicateRight.setCreatedAt(new Date());
+        duplicateRight.setCreatedAt(LocalDateTime.now());
         duplicateRight.setIdTypeRight(typeRightEntity);
 
         // This should throw DataIntegrityViolationException

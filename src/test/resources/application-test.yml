@@ -7,7 +7,6 @@ spring:
     properties:
       hibernate:
         default_schema: base_template
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
       ddl-auto: none

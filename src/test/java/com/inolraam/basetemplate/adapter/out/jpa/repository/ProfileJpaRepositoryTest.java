@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -50,14 +50,14 @@ class ProfileJpaRepositoryTest extends BaseRepositoryTest {
         roleOneEntity.setName(TEST_ROLE_ONE);
         roleOneEntity.setVisible(true);
         roleOneEntity.setCreatedBy(CREATED_BY);
-        roleOneEntity.setCreatedAt(new Date());
+        roleOneEntity.setCreatedAt(LocalDateTime.now());
         entityManager.persist(roleOneEntity);
 
         roleTwoEntity = new RoleEntity();
         roleTwoEntity.setName(TEST_ROLE_TWO);
         roleTwoEntity.setVisible(true);
         roleTwoEntity.setCreatedBy(CREATED_BY);
-        roleTwoEntity.setCreatedAt(new Date());
+        roleTwoEntity.setCreatedAt(LocalDateTime.now());
         entityManager.persist(roleTwoEntity);
 
         entityManager.flush(); // Ensure roles are persisted with IDs
@@ -67,14 +67,14 @@ class ProfileJpaRepositoryTest extends BaseRepositoryTest {
         profileEntity.setName(TEST_PROFILE_NAME);
         profileEntity.setVisible(true);
         profileEntity.setCreatedBy(CREATED_BY);
-        profileEntity.setCreatedAt(new Date());
+        profileEntity.setCreatedAt(LocalDateTime.now());
 
         // Create second profile entity for testing
         profileTwoEntity = new ProfileEntity();
         profileTwoEntity.setName(TEST_PROFILE_TWO);
         profileTwoEntity.setVisible(true);
         profileTwoEntity.setCreatedBy(CREATED_BY);
-        profileTwoEntity.setCreatedAt(new Date());
+        profileTwoEntity.setCreatedAt(LocalDateTime.now());
     }
 
     // Helper method to create ProfileEntity instances for testing
@@ -83,7 +83,7 @@ class ProfileJpaRepositoryTest extends BaseRepositoryTest {
         profile.setName(name);
         profile.setVisible(true);
         profile.setCreatedBy(CREATED_BY);
-        profile.setCreatedAt(new Date());
+        profile.setCreatedAt(LocalDateTime.now());
         return profile;
     }
 

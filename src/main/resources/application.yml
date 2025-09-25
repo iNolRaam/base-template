@@ -13,33 +13,48 @@ spring:
   config:
     activate:
       on-profile: dev
-  # Datasource configuration
+  # Datasource configuration - Optimized for Spring Boot 4
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/db_basetemplate
     username: postgres
     password: admin
+    # HikariCP optimizations for Spring Boot 4
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      pool-name: SpringBoot4HikariCP
+      max-lifetime: 1200000
+      connection-timeout: 30000
+      validation-timeout: 5000
+      leak-detection-threshold: 60000
+      connection-test-query: SELECT 1
 
-  # JPA configuration
+  # JPA configuration - Hibernate 7 Performance Tuning
   jpa:
+    # PostgreSQL dialect se detecta automáticamente, no es necesario especificarlo
     properties:
       hibernate:
-        default_schema: base_template
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
-    # database-platform:
-    # hibernate:
-    #   ddl-auto: validate
-    # properties:
-    #   generate_statistics: true
-    #   hibernate:
-    #     format_sql: true
-    #     enable_lazy_load_no_trans: true
-    #   javax:
-    #     persistence:
-    #       sharedCache:
-    #         mode: ALL
-    # open-in-view: false
+        "[default_schema]": base_template
+        # Performance optimizations for Hibernate 7
+        "[format_sql]": false
+        "[show_sql]": false
+        "[batch_fetch_style]": PADDED
+        "[default_batch_fetch_size]": 16
+        "[enable_lazy_load_no_trans]": false
+        jdbc:
+          "[batch_size]": 25
+          "[fetch_size]": 50
+          "[batch_versioned_data]": true
+        "[order_inserts]": true
+        "[order_updates]": true
+        "[generate_statistics]": false
+    show-sql: false
+    # Deshabilitamos Open-in-View para mejor rendimiento y buenas prácticas
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
 
   # SQL configuration
   sql:
@@ -47,6 +62,63 @@ spring:
       schema-locations: classpath:DDL/schema.sql
       # data-locations: classpath:DML/data.sql
       mode: ${sqlMode:never}
+
+# Configuración de Actuator - Spring Boot 4 Enhanced
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,configprops,loggers,httptrace,threaddump,heapdump
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+    os:
+      enabled: true
+  # Spring Boot 4 - Enhanced metrics and observability
+  metrics:
+    enable:
+      hikaricp: true
+      jvm: true
+      jdbc: true
+      system: true
+  simple:
+    metrics:
+      export:
+        enabled: true
+  # Observability enhancements
+  tracing:
+    sampling:
+      probability: 1.0
+      
+# SpringDoc OpenAPI 3.x Configuration  
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+    try-it-out-enabled: true
+    filter: true
+  show-actuator: true
+  group-configs:
+    - group: 'api'
+      display-name: 'Base Template API'
+      paths-to-match: '/api/**'
 ---
 spring:
   config:

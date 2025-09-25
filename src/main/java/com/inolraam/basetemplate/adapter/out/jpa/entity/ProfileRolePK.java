@@ -3,6 +3,7 @@ package com.inolraam.basetemplate.adapter.out.jpa.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class ProfileRolePK implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
