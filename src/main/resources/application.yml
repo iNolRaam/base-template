@@ -31,6 +31,17 @@ spring:
       leak-detection-threshold: 60000
       connection-test-query: SELECT 1
 
+  # SQL configuration
+  sql:
+    init:
+      schema-locations: classpath:DDL/schema.sql
+      # data-locations: classpath:DML/data.sql
+      mode: always
+      continue-on-error: false
+      separator: ";"
+      encoding: UTF-8
+      platform: postgresql
+
   # JPA configuration - Hibernate 7 Performance Tuning
   jpa:
     # PostgreSQL dialect se detecta automáticamente, no es necesario especificarlo
@@ -38,30 +49,26 @@ spring:
       hibernate:
         "[default_schema]": base_template
         # Performance optimizations for Hibernate 7
-        "[format_sql]": false
-        "[show_sql]": false
-        "[batch_fetch_style]": PADDED
-        "[default_batch_fetch_size]": 16
-        "[enable_lazy_load_no_trans]": false
-        jdbc:
-          "[batch_size]": 25
-          "[fetch_size]": 50
-          "[batch_versioned_data]": true
-        "[order_inserts]": true
-        "[order_updates]": true
-        "[generate_statistics]": false
-    show-sql: false
+        # "[format_sql]": false
+        # "[show_sql]": false
+        # "[batch_fetch_style]": PADDED
+        # "[default_batch_fetch_size]": 16
+        # "[enable_lazy_load_no_trans]": false
+        # jdbc:
+        #   "[batch_size]": 25
+        #   "[fetch_size]": 50
+        #   "[batch_versioned_data]": true
+        # "[order_inserts]": true
+        # "[order_updates]": true
+        # "[generate_statistics]": false
+    show-sql: true
     # Deshabilitamos Open-in-View para mejor rendimiento y buenas prácticas
     open-in-view: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
+    # Ensure SQL init runs before JPA validation
+    defer-datasource-initialization: true
 
-  # SQL configuration
-  sql:
-    init:
-      schema-locations: classpath:DDL/schema.sql
-      # data-locations: classpath:DML/data.sql
-      mode: ${sqlMode:never}
 
 # Configuración de Actuator - Spring Boot 4 Enhanced
 management:

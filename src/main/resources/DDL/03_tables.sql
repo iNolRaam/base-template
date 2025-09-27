@@ -113,3 +113,45 @@ CREATE TABLE base_template.profiles_roles
 
 ALTER TABLE IF EXISTS base_template.profiles_roles
     OWNER to postgres;
+
+CREATE TABLE base_template.users
+(
+    id            bigint                 NOT NULL DEFAULT nextval('base_template.seq_users_id'::regclass),
+    email         character varying(100) NOT NULL,
+    username      character varying(30)  NOT NULL,
+    email_verified boolean                NOT NULL DEFAULT false,
+    status        character varying(10)  NOT NULL,
+    last_login    timestamp without time zone,
+    created_by    character varying(100) NOT NULL,
+    created_at    timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_by    character varying(100),
+    lst_updated_at timestamp without time zone,
+    CONSTRAINT pk_users_id PRIMARY KEY (id),
+    CONSTRAINT uk_users_email UNIQUE (email),
+    CONSTRAINT uk_users_username UNIQUE (username)
+);
+
+ALTER TABLE IF EXISTS base_template.users
+    OWNER to postgres;
+
+CREATE TABLE base_template.users_profiles
+(
+    id_user       bigint                 NOT NULL,
+    id_profile    bigint                 NOT NULL,
+    created_by    character varying(100) NOT NULL,
+    created_at    timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_by    character varying(100),
+    lst_updated_at timestamp without time zone,
+    CONSTRAINT pk_users_profiles_comb PRIMARY KEY (id_user, id_profile),
+    CONSTRAINT fk_users_profiles_id_user FOREIGN KEY (id_user)
+        REFERENCES base_template.users (id) MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_users_profiles_id_profile FOREIGN KEY (id_profile)
+        REFERENCES base_template.profiles (id) MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+);
+
+ALTER TABLE IF EXISTS base_template.users_profiles
+    OWNER to postgres;

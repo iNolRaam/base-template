@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 public enum Fields {
     NAME("name"),
     ID("id"),
-    RIGHTS("rights");
+    RIGHTS("rights"),
+    EMAIL("email"),
+    USERNAME("username");
 
     private final String label;
 }

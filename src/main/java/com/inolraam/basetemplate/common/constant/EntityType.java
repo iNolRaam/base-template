@@ -10,7 +10,8 @@ public enum EntityType {
     TYPE_RIGHT("Type Right"),
     ROLE("Role"),
     ROLE_RIGHT("Role Right"),
-    PROFILE("Profile");
+    PROFILE("Profile"),
+    USER("User");
 
     private final String label;
 }

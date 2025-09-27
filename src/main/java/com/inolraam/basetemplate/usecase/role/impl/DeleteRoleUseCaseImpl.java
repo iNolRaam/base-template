@@ -3,7 +3,6 @@ package com.inolraam.basetemplate.usecase.role.impl;
 import com.inolraam.basetemplate.domain.port.RoleRepository;
 import com.inolraam.basetemplate.domain.service.RoleValidator;
 import com.inolraam.basetemplate.usecase.role.DeleteRoleUseCase;
-import com.inolraam.basetemplate.usecase.role.dto.RoleIDInput;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,8 +17,8 @@ public class DeleteRoleUseCaseImpl implements DeleteRoleUseCase {
 
     @Override
     @Transactional
-    public void execute(RoleIDInput idInput) {
-        roleValidator.validateDeletionAllowed(idInput.getId());
-        roleRepository.deleteById(idInput.getId());
+    public void execute(Long id) {
+        roleValidator.validateDeletionAllowed(id);
+        roleRepository.deleteById(id);
     }
 }

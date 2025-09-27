@@ -36,7 +36,7 @@ public class ProfileController implements ProfileSwagger {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteProfile(@PathVariable long id) {
-        deleteProfileUseCase.execute(new ProfileIDInput(id));
+        deleteProfileUseCase.execute(id);
         return ResponseBuilder.success(HttpStatus.ACCEPTED);
     }
 

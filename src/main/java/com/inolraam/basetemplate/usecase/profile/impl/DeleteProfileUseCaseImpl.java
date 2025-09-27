@@ -3,7 +3,6 @@ package com.inolraam.basetemplate.usecase.profile.impl;
 import com.inolraam.basetemplate.domain.port.ProfileRepository;
 import com.inolraam.basetemplate.domain.service.ProfileValidator;
 import com.inolraam.basetemplate.usecase.profile.DeleteProfileUseCase;
-import com.inolraam.basetemplate.usecase.profile.dto.ProfileIDInput;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,8 +17,8 @@ public class DeleteProfileUseCaseImpl implements DeleteProfileUseCase {
 
     @Override
     @Transactional
-    public void execute(ProfileIDInput idInput) {
-        profileValidator.validateDeletionAllowed(idInput.getId());
-        profileRepository.deleteById(idInput.getId());
+    public void execute(Long id) {
+        profileValidator.validateDeletionAllowed(id);
+        profileRepository.deleteById(id);
     }
 }

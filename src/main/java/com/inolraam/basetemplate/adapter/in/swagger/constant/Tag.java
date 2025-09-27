@@ -6,4 +6,5 @@ public final class Tag {
     public static final String RIGHT = "Endpoints for Right";
     public static final String PROFILE = "Endpoints for Profile";
     public static final String ROLE = "Endpoints for Role";
+    public static final String USER = "Endpoints for User";
 }

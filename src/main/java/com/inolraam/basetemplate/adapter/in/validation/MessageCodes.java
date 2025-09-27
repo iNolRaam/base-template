@@ -14,6 +14,7 @@ public final class MessageCodes {
     public static final String NOT_FOUND = "exception.notFound";
     public static final String RESOURCE_IN_USE = "exception.resourceInUse";
     public static final String TYPE_MISMATCH = "exception.typeMismatch";
+    public static final String USER_PROFILES_REQUIRED = "validation.field.UserProfilesRequired";
 
 
 
@@ -22,10 +23,12 @@ public final class MessageCodes {
     public static final String NOT_BLANK= "{validation.field.NotBlank}";
     public static final String SIZE = "{validation.field.Size}";
     public static final String POSITIVE = "{validation.field.Positive}";
+    public static final String EMAIL = "{validation.field.Email}";
 
     //Messages for @Pattern annotation
     public static final String REGEX_ONLY_BASIC_LETTERS = "{regex.basicLetters}";
     public static final String REGEX_ONLY_FOR_SYSTEM_PARAMETERS =  "{regex.systemParameter}";
+    public static final String REGEX_USERNAME_FORMAT = "{regex.usernameFormat}";
 
  
 }

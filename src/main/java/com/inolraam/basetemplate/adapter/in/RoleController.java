@@ -36,7 +36,7 @@ public class RoleController implements RoleSwagger {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteRole(@PathVariable long id) {
-        deleteRoleUseCase.execute(new RoleIDInput(id));
+        deleteRoleUseCase.execute(id);
         return ResponseBuilder.success(HttpStatus.ACCEPTED);
     }
 
