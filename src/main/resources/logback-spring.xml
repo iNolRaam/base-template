@@ -45,8 +45,9 @@
     </springProfile>
 
     <!-- Configuración para creación/reinicialización de DB -->
-    <springProfile name="createdb">
-        <logger name="com.inolraam.basetemplate" level="INFO"/>
+    <springProfile name="joindb">
+        <logger name="com.inolraam" level="DEBUG"/>
+        <logger name="com.inolraam.basetemplate.config" level="DEBUG"/>
         <logger name="org.springframework.boot.autoconfigure.sql.init" level="DEBUG"/>
         <logger name="org.springframework.jdbc.datasource.init" level="DEBUG"/>
         <logger name="org.springframework.sql" level="DEBUG"/>

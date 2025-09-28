@@ -64,17 +64,26 @@ Database Pool: HikariCP 5-20 conexiones
 ## 🛠️ Desarrollo
 
 ```bash
+
+# Profiles
+#We have 4 maven's profiles dev, prod, joindb and test.
+#We have 2 spring's profiles to run the application dev and prod.
+
 # Compilar
 mvn clean compile
 
 # Tests
-mvn test
+mvn clean test -Ptest
 
-# Package
-mvn clean package
+# Package, you can change "local" for "prod"
+mvn clean package -Plocal
 
-# Profiles disponibles: dev, prod
-mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=prod"
+#Install, you can change "local" for "prod"
+mvn clean install -Plocal
+
+# To join the database's files
+mvn clean install -Pjoindb   # Add -Dcreatedb=always if you want reinstall database
+
 ```
 
 A base template for Spring Boot 4 projects following hexagonal architecture principles.
@@ -106,39 +115,6 @@ src
 │           └── migration
 │               └── V1__Initial_setup.sql
 
-```
-
-## Developer Profile
-
-To clean, package, and re-create the database in the development environment, use the following command:
-
-```
-mvn clean package -DsqlMode=always -Dprofile=dev
-```
-
-To enable and disable integration tests
-```
-mvn test -Dtestcontainers=enabled
-mvn test -Dtestcontainers=disabled
-´´´
-
-## Production Profile
-
-To clean, package, and re-create the database in the production environment, use the following command:
-
-```
-mvn clean package -DsqlMode=always -Dprofile=prod
-```
-
-
-To test a specific test suit
-```
-mvn clean test -Ptest -Dtest=ProfileJpaRepositoryTest
-```
-
-To generate a report and html report
-```
-mvn surefire-report:report && start target/reports/surefire.html
 ```
 
 

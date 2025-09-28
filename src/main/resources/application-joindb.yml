@@ -21,7 +21,7 @@ spring:
   sql:
     init:
       schema-locations: classpath:DDL/schema.sql
-      mode: always
+      mode: @createdb@
       continue-on-error: true
       separator: ";"
       encoding: UTF-8
