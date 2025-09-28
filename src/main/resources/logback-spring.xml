@@ -4,8 +4,8 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
-    <!-- Configuración específica para desarrollo -->
-    <springProfile name="dev">
+    <!-- Configuración específica para desarrollo local -->
+    <springProfile name="local">
         <logger name="com.inolraam.basetemplate" level="DEBUG"/>
         <logger name="org.springframework.web" level="DEBUG"/>
         <logger name="org.hibernate.SQL" level="DEBUG"/>
@@ -27,7 +27,7 @@
         <!-- Appender para archivo en producción -->
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>logs/base-template.log</file>
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
                 <fileNamePattern>logs/base-template.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
                 <maxFileSize>10MB</maxFileSize>
                 <maxHistory>30</maxHistory>
@@ -44,14 +44,14 @@
         </root>
     </springProfile>
 
-    <!-- Configuración para tests -->
-    <springProfile name="test">
-        <logger name="com.inolraam.basetemplate" level="DEBUG"/>
-        <logger name="org.springframework" level="WARN"/>
-        <logger name="org.hibernate" level="WARN"/>
-        <logger name="org.testcontainers" level="INFO"/>
+    <!-- Configuración para creación/reinicialización de DB -->
+    <springProfile name="createdb">
+        <logger name="com.inolraam.basetemplate" level="INFO"/>
+        <logger name="org.springframework.boot.autoconfigure.sql.init" level="DEBUG"/>
+        <logger name="org.springframework.jdbc.datasource.init" level="DEBUG"/>
+        <logger name="org.springframework.sql" level="DEBUG"/>
         
-        <root level="WARN">
+        <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>

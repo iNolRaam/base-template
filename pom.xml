@@ -30,21 +30,22 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-
 		<!-- Dependency Versions -->
 		<spring-boot.version>4.0.0-M3</spring-boot.version>
 		<springdoc-openapi.version>3.0.0-M1</springdoc-openapi.version>
 		<postgresql.version>42.7.8</postgresql.version>
 		<lombok.version>1.18.42</lombok.version>
 		<testcontainers.version>1.21.3</testcontainers.version>
+		<caffeine.version>3.2.2</caffeine.version>
+		<maven.antrun.plugin.version>3.1.0</maven.antrun.plugin.version>
 	</properties>
 	<dependencies>
 
+		<!-- Spring Boot Core Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -59,50 +60,51 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
+
+		<!-- Web Container -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
 
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${springdoc-openapi.version}</version>
-		</dependency>
+		<!-- Database -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- Caching -->
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+			<version>${caffeine.version}</version>
+		</dependency>
+
+		<!-- Documentation -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi.version}</version>
+		</dependency>
+
+		<!-- Utilities -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 		</dependency>
-		<!-- Spring Boot 4 Performance & Caching Dependencies -->
+
+		<!-- Testing Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-cache</artifactId>
-
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.github.ben-manes.caffeine</groupId>
-			<artifactId>caffeine</artifactId>
-			<version>3.2.2</version>
-		</dependency>
-
-		<!-- For devs in local environment -->
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
@@ -115,45 +117,44 @@
 			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
+		<finalName>${project.name}-${profileName}-${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>application*.yml</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>application.yml</include>
+					<include>application-${profileName}.yml</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>3.1.0</version>
-				<executions>
-					<execution>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target>
-								<!-- Crea la carpeta de salida si no existe -->
-								<mkdir dir="${project.build.outputDirectory}/DDL" />
 
-								<!-- Une los archivos en orden en un solo schema.sql -->
-								<concat destfile="${project.build.outputDirectory}/DDL/schema.sql"
-									fixlastline="true">
-									<fileset dir="src/main/resources/DDL" includes="*.sql" />
-								</concat>
-							</target>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<compilerArgs>
+						<arg>-parameters</arg>
+						<arg>-Xlint:unchecked</arg>
+						<arg>-Xlint:deprecation</arg>
+					</compilerArgs>
 					<!-- Configuración explícita para annotation processing -->
 					<annotationProcessorPaths>
 						<path>
@@ -176,7 +177,80 @@
 
 	<profiles>
 		<profile>
+			<id>local</id>
+			<properties>
+				<profileName>local</profileName>
+			</properties>
+			<dependencies>
+				<!-- Development Tools -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<scope>runtime</scope>
+					<optional>true</optional>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profileName>prod</profileName>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<debug>false</debug>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>createdb</id>
+			<properties>
+				<profileName>createdb</profileName>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven.antrun.plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<!-- Crea la carpeta de salida si no existe -->
+										<mkdir dir="${project.build.outputDirectory}/DDL" />
+
+										<!-- Une los archivos en orden en un solo schema.sql -->
+										<concat destfile="${project.build.outputDirectory}/DDL/schema.sql"
+											fixlastline="true">
+											<fileset dir="src/main/resources/DDL" includes="*.sql" />
+										</concat>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
 			<id>test</id>
+			<properties>
+				<profileName>test</profileName>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -185,6 +259,31 @@
 						<configuration>
 							<skipTests>false</skipTests>
 						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven.antrun.plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<!-- Crea la carpeta de salida si no existe -->
+										<mkdir dir="${project.build.outputDirectory}/DDL" />
+
+										<!-- Une los archivos en orden en un solo schema.sql -->
+										<concat destfile="${project.build.outputDirectory}/DDL/schema.sql"
+											fixlastline="true">
+											<fileset dir="src/main/resources/DDL" includes="*.sql" />
+										</concat>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>

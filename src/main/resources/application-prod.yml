@@ -1,0 +1,54 @@
+# =============================================================================
+# PRODUCTION PROFILE CONFIGURATION
+# =============================================================================
+# Configuration specific to production environment
+# =============================================================================
+
+# Production Datasource Configuration
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/db_basetemplate_prod}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:}
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 50
+      idle-timeout: 600000
+      pool-name: SpringBoot4HikariCP-Prod
+      max-lifetime: 1800000
+
+  # SQL configuration - Production (never auto-execute)
+  sql:
+    init:
+      mode: never
+
+  # JPA configuration - Production
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        "[format_sql]": false
+        "[generate_statistics]": false
+
+# Production logging (restrictive)
+logging:
+  level:
+    "[com.inolraam]": INFO
+    "[org.springframework]": WARN
+    "[org.hibernate]": WARN
+    root: WARN
+
+# Production management endpoints (restricted)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+  metrics:
+    enable:
+      hikaricp: true
+      jvm: true
+      system: true

@@ -1,0 +1,66 @@
+# =============================================================================
+# LOCAL DEVELOPMENT PROFILE CONFIGURATION
+# =============================================================================
+# Configuration specific to local development environment
+# =============================================================================
+
+# Local Datasource Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_basetemplate
+    username: postgres
+    password: admin
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      pool-name: SpringBoot4HikariCP-Local
+      max-lifetime: 1200000
+
+  # SQL configuration - Development (disabled by default)
+  sql:
+    init:
+      schema-locations: classpath:DDL/schema.sql
+      mode: never
+      continue-on-error: true
+      separator: ";"
+      encoding: UTF-8
+      platform: postgresql
+
+  # JPA configuration - Development
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        "[format_sql]": true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+# Development logging
+logging:
+  level:
+    "[org.springframework.boot.autoconfigure.sql.init]": DEBUG
+    "[org.springframework.jdbc.datasource.init]": DEBUG
+    "[org.springframework.sql]": DEBUG
+    "[com.inolraam]": DEBUG
+    root: INFO
+
+# Development management endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,configprops,loggers,httptrace,threaddump,heapdump
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    enable:
+      hikaricp: true
+      jvm: true
+      jdbc: true
+      system: true
+  tracing:
+    sampling:
+      probability: 1.0

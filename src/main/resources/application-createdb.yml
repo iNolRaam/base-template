@@ -1,0 +1,44 @@
+# =============================================================================
+# DATABASE CREATE/REINITIALIZATION PROFILE CONFIGURATION
+# =============================================================================
+# Configuration specific to database creation and reinitialization
+# =============================================================================
+
+# CreateDB Datasource Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_basetemplate
+    username: postgres
+    password: admin
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      pool-name: SpringBoot4HikariCP-CreateDB
+      max-lifetime: 1200000
+
+  # SQL configuration - Reinitialization (always execute)
+  sql:
+    init:
+      schema-locations: classpath:DDL/schema.sql
+      mode: always
+      continue-on-error: true
+      separator: ";"
+      encoding: UTF-8
+      platform: postgresql
+
+  # JPA configuration - Reinitialization
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        "[format_sql]": false
+
+# CreateDB logging (focused on SQL initialization)
+logging:
+  level:
+    "[org.springframework.boot.autoconfigure.sql.init]": DEBUG
+    "[org.springframework.jdbc.datasource.init]": DEBUG
+    "[org.springframework.sql]": DEBUG
+    "[com.inolraam]": INFO
+    root: INFO

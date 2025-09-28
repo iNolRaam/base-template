@@ -3,14 +3,30 @@ spring:
     url: jdbc:tc:postgresql:15.2:///testdb
     username: test
     password: test
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
   jpa:
     properties:
       hibernate:
-        default_schema: base_template
+        "[default_schema]": base_template
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
       ddl-auto: none
+
+  # SQL configuration - Reinitialization (always execute)
   sql:
     init:
-      mode: always
       schema-locations: classpath:DDL/schema.sql
+      mode: always
+      continue-on-error: true
+      separator: ";"
+      encoding: UTF-8
+      platform: postgresql
+
+# Jakarta Persistence properties for Spring Boot 4 
+jakarta:
+  persistence:
+    jdbc:
+      url: jdbc:tc:postgresql:15.2:///testdb
+      user: test
+      password: test
