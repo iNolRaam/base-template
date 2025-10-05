@@ -81,8 +81,8 @@ mvn clean package -Plocal
 #Install, you can change "local" for "prod"
 mvn clean install -Plocal
 
-# To join the database's files
-mvn clean install -Pjoindb   # Add -Dcreatedb=always if you want reinstall database
+# To join the database's files, You can add -Dcreatedb=always (default value is "never") if you want reinstall database
+mvn clean install -Pjoindb -Dcreatedb=always  
 
 ```
 

@@ -1,0 +1,9 @@
+package com.inolraam.basetemplate.core.domain.port.inbound.profile;
+
+import com.inolraam.basetemplate.core.domain.port.inbound.UseCaseVoid;
+/**
+ * Interface for deleting a profile use case.
+ */
+public interface DeleteProfileUseCase extends UseCaseVoid<Long> {
+    void execute(Long input);
+}

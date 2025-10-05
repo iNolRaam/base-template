@@ -1,6 +1,7 @@
 package com.inolraam.basetemplate.adapter.out.jpa.repository;
 
-import com.inolraam.basetemplate.adapter.out.jpa.entity.RoleEntity;
+import com.inolraam.basetemplate.core.adapter.outbound.jpa.entity.RoleEntity;
+import com.inolraam.basetemplate.core.adapter.outbound.jpa.repository.RoleJpaRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

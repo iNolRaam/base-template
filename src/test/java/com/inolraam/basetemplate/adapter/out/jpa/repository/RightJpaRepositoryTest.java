@@ -1,7 +1,9 @@
 package com.inolraam.basetemplate.adapter.out.jpa.repository;
 
-import com.inolraam.basetemplate.adapter.out.jpa.entity.RightEntity;
-import com.inolraam.basetemplate.adapter.out.jpa.entity.TypeRightEntity;
+import com.inolraam.basetemplate.core.adapter.outbound.jpa.entity.RightEntity;
+import com.inolraam.basetemplate.core.adapter.outbound.jpa.entity.TypeRightEntity;
+import com.inolraam.basetemplate.core.adapter.outbound.jpa.repository.RightJpaRepository;
+import com.inolraam.basetemplate.core.adapter.outbound.jpa.repository.TypeRightJpaRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
